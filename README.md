@@ -1,2 +1,3 @@
-# mx_sec_conf
-Configuration sécurisé d'une entrée de messagerie MX avec postfix, rspamd
+# Configuration sécurisée d'une entrée de messagerie MX avec postfix, rspamd
+## Postfix
+## Rspamd
