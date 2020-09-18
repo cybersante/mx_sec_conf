@@ -33,6 +33,7 @@ Pas de faux positif connu.
 ## Segmentation des rôles <a name="segm"></a>
 ### Description
 Cette règle permet une meilleure maitrise des flux entrants et sortants, et permet d'adapter au mieux les configurations de filtrages.
+De plus, si un élément de votre architecture est en liste noire, les autres éléments ne seront pas impactés.
 (https://fr.wikipedia.org/wiki/Open_relay)
 ### Exemple de configuration
 La segmentation à privilégier au niveau de l'architecture:
