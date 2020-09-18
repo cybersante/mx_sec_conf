@@ -1,4 +1,4 @@
-# Exemple de configuration sécurisée d'une entrée de messagerie MX
+# Securiser l'entrée de messagerie (MX)
 ## Introduction
 Ce dépot contient la configuration nécéssaire pour passer les tests de sécurité de l'outil d'analyse de la cellule ACSS/ANS présenté lors du webinaire ACSS n°4 (https://esante.gouv.fr/sites/default/files/media_entity/documents/acss_web_conference_n4.pdf - https://www.facebook.com/AgenceDuNumeriqueEnSante/videos/792330108189438/).  
 
