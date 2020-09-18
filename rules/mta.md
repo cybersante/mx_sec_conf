@@ -6,9 +6,9 @@ Facilité de mise en place: Simple ~~/ Moyen / Complexe~~
 
 Les exemples de configuration (ci-dessous) sont basés sur postfix (http://www.postfix.org/).  
 
-1. [Relais de courrier ouvert](#Relais de courrier ouvert)
+1. [Relais de courrier ouvert](#relai)
 
-## Relais de courrier ouvert
+## Relais de courrier ouvert <a name="relai"></a>
 ### Description
 Cette règle permet d'éviter que tout le monde puisse utiliser votre serveur de messagerie pour transmettre des courriels afin d'éviter les risques suivants:
   - Utilisation de ressources illégitimement;
