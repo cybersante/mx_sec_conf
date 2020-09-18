@@ -6,7 +6,7 @@ Il vous permettra de trouver des exemples concrets de configuration à integrer 
 
 ## Solution proposée
 La solution proposée par la cellule ACSS utilise Rspamd (https://rspamd.com/) et clamav (https://www.clamav.net/).  
-Elle sert principalement d'exemple que vous pourrez porter dans votre solution de messagerie existante, tout en prennant en compte, selon votre contexte, le risque de faux positifs que peuvent entrainer certaines règles. Il sera donc parfois nécéssaire en fonction de votre context d'adapter les règles.
+Elle sert principalement d'exemple que vous pourrez porter dans votre solution de messagerie existante, tout en prennant en compte, selon votre contexte, le risque de faux positifs que peuvent entrainer certaines règles. Il sera donc parfois nécéssaire en fonction de votre contexte d'adapter les règles.
 
 ### Limites de la solution
 La sécurité informatique est complexe et cette solution permet de limiter qu'une petite partie des risques encourus par un système informatique (https://attack.mitre.org/techniques/T1566/001/ & https://attack.mitre.org/techniques/T1566/002/). 
