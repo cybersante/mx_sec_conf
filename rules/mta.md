@@ -72,7 +72,7 @@ Vous trouverez plus de renseignement sur ce lien http://www.postfix.org/TUNING_R
 ### Faux positifs
 Pas de faux positif connu.
 
-## Chiffrement <a name="cyph"></a>
+## Chiffrement <a name="cyph"></a>
 ### Description
 Cette règle permet de garantir la confidentialité d'un échange afin d'éviter le risque lié a l'écoute du réseau.
 Privilégiez l'échange par chiffrement sur l'ensemble de votre réseau, lors de la réception et de l'envoi de courriel.
