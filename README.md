@@ -43,3 +43,4 @@ Pour finir, il est important de ne pas tout miser sur les protections peripheriq
   - [Filtrage des anomalies](rules/anomalies.md)
   - [Protection de son webmail](rules/webmail.md)
   - [Protection des services de la messagerie exposés sur internet](rules/internet.md)
+  - [Limitation des fuites d'informations sur l'architecture interne](rules/header_leak.md)
