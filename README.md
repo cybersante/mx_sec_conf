@@ -2,7 +2,7 @@
 ## Introduction
 Ce dépot contient la configuration nécéssaire pour passer les tests de sécurité de l'outil d'analyse de la cellule ACSS/ANS présenté lors du webinaire ACSS n°4 (https://esante.gouv.fr/sites/default/files/media_entity/documents/acss_web_conference_n4.pdf - https://www.facebook.com/AgenceDuNumeriqueEnSante/videos/792330108189438/).  
 
-Au delà de la couverture des tests proposés par le service ACSS, il intègre les principaux risques liés à la messagerie professionnelle (à l'exception du spam classique qui est souvent soumis à l'apprentissage):
+Au delà de la couverture des tests proposés par le service ACSS, il intègre les principaux risques liés à la messagerie professionnelle (à l'exception des spams classiques qui sont souvent soumis à l'apprentissage):
   - DDoS et DoS (https://fr.wikipedia.org/wiki/Attaque_par_d%C3%A9ni_de_service);
   - Phishing:
     - Campagne de malware par courriel avec pièce jointe;
