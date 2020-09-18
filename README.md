@@ -16,6 +16,7 @@ Au delà de la couverture des tests proposés par le service ACSS, il intègre l
   - Brute force des services de la messagerie exposés sur internet (webmail, imap, ...);
   - Fuite d'identifiants de messagerie avec risque de compromission d'un compte;
   - Utilisation de votre messagerie pour transmettre des courriels malicieux;
+  
 Il vous permettra de trouver des exemples concrets de configuration à integrer dans votre messagerie, mais vous pouvez aussi utiliser le docker afin de directement integrer l'ensemble dans votre chaine de messagerie.
 
 ## Solution proposée
