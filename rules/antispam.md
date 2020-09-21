@@ -26,7 +26,7 @@ Nous vous proposons une configuration RSPAMD modifié en provenance de la messag
 Rspamd est disponible sur les principales distributions linux (https://rspamd.com/downloads.html). Cependant il faudra installer les outils annexes aussi (redis, clamav, ...).
 ### Fonctionnalités
 Comme indiqué plus haut, je vous donne la majorité des fonctionnalités du produit Rspamd (version 2.5) sans rentrer dans le detail, pour plus d'informations suivez le lien...
-#### "local.d/composites.conf"
+#### Scores, Actions, Symboles et Combinaisons
 Rspamd offre des règles internes (définies par des symboles 'SYMBOLS' que vous pouvez retrouver sur l'interface graphique de RSPAMD en haut afin d'identifier l'ensemble des possibilités offertent par défaut). Il est possible dans le fichier "local.d/composites.conf" de créer des règles en combinant des 'SYMBOLS'. Vous pouvez aussi créer des symboles pour générer de nouvelles règles, ces nouveaux symboles seront alors visibles dans l'interface graphique de RSPAMD.
 
 Pour chaque symbole on définie un score. Si le courriel déclenche un symbole (donc une règle) alors il ajoute le score de ce symbole au score déjà obtenu par le courriel. Si le score atteint les limites fixées dans "local.d/action.conf" alors il effectuera l'action indiquée.
