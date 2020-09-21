@@ -13,18 +13,29 @@ Règles:
 
 
 ##  Let's get started! <a name="instal"></a>
-Attention, cette documentation n'a pas pour objectif de vous présenter ou expliquer les possibilités offertent par Rspamd.  
-Pour ce faire, nous vous invitons à aller sur leur site et à lire le retour d'experience de Monsieur G. CATTEAU au JRES 2019 (https://conf-ng.jres.org/2019/document_revision_4778.html?download).  
+Attention, cette documentation n'a pas pour objectif de vous expliquer en detail les possibilités offertent par Rspamd.  
+Pour ce faire, nous vous invitons à aller sur leur site (https://rspamd.com/doc/configuration/index.html) et à lire le retour d'experience de Monsieur G. CATTEAU au JRES 2019 (https://conf-ng.jres.org/2019/document_revision_4778.html?download).  
 
-Comme l'indique Monsieur G. CATTEAU dans son retour d'experience, il est préférable dans un premier temps de mettre RSPAMD en "no action" pour prendre le temps d'identifier les risques de faux positif pouvant engendrer de la perte de courriels légitimes (https://rspamd.com/doc/workers/rspamd_proxy.html#mirroring).
-### Docker
+### Installation
+#### Docker
 Le plus simple pour installer RSPAMD est d'utiliser un docker qui emportera l'ensemble des éléments nécéssaires à son bon fonctionnement (redis, olefy, clamav, ...).  
 Si vous ne connaissez pas encore la technologie docker, il est temps de s'y mettre: https://www.docker.com/ .  
 Nous vous proposons une configuration RSPAMD modifié en provenance de la messagerie "Mailcow" (https://github.com/mailcow/mailcow-dockerized), mais vous restez libre d'utiliser une autre source (il en existe beaucoup sur github):
  - [Docker-compose Rspamd](rules/antispam.md)
-### Package
+#### Package
 Rspamd est disponible sur les principales distributions linux (https://rspamd.com/downloads.html). Cependant il faudra installer les outils annexes aussi (redis, clamav, ...).
+### Fonctionnalités
+Comme indiqué plus haut, je vous donne la majorité des fonctionnalités du produit Rspamd (version 2.5) sans rentrer dans le detail, pour plus d'informations suivez le lien...
+#### "local.d/composites.conf"
+Rspamd offre des règles internes (définies par des symboles 'SYMBOLS' que vous pouvez retrouver sur l'interface graphique de RSPAMD en haut afin d'identifier l'ensemble des possibilités offertent par défaut). Il est possible dans le fichier "local.d/composites.conf" de créer des règles en combinant des 'SYMBOLS'. Vous pouvez aussi créer des symboles pour générer de nouvelles règles, ces nouveaux symboles seront alors visibles dans l'interface graphique de RSPAMD.
+
+Pour chaque symbole on définie un score. Si le courriel déclenche un symbole (donc une règle) alors il ajoute le score de ce symbole au score déjà obtenu par le courriel. Si le score atteint les limites fixées dans "local.d/action.conf" alors il effectuera l'action indiquée.
+Pour plus d'informations: 
+  - https://rspamd.com/doc/configuration/composites.html
+  - https://rspamd.com/doc/configuration/metrics.html
+  
 ### Configuration dans le MTA
+Comme l'indique Monsieur G. CATTEAU dans son retour d'experience, il est préférable dans un premier temps de mettre RSPAMD en "no action" pour prendre le temps d'identifier les risques de faux positif pouvant engendrer de la perte de courriels légitimes (https://rspamd.com/doc/workers/rspamd_proxy.html#mirroring).
 #### Postfix
 Vous trouverez dans le lien suivant, les informations pour integrer RSPAMD dans postfix via le protocol milter: https://rspamd.com/doc/workers/rspamd_proxy.html .  
 Pensez à tester sans action dans un premier temps (https://rspamd.com/doc/workers/rspamd_proxy.html#mirroring).  
