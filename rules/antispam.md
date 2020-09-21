@@ -225,22 +225,24 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
     - utilisation services externes: non
     - Réference: https://rspamd.com/doc/modules/mid.html
   - **Milter Headers**: 
-    - Description: Permet de verifier:
-       - si le mime type est dans la liste des => Symbole:
-       - si une piece jointe à l'extension en relation avec son "mime-type" => Symbole:
-       - 
-    - Fichier de configuration: "local.d/milter_headers.conf"
-    - Activation: Oui
-    - Risque de faux positifs: Aucun pas d'action de score ou rejet.
-    - utilisation services externes: non
-    - Réference: https://rspamd.com/doc/modules/mime_types.html
-  - **Mime types**: 
     - Description: Permet d'ajouter et/ou supprimer des en-têtes d'un courriels.
     - Fichier de configuration: "local.d/milter_headers.conf"
     - Activation: Oui
     - Risque de faux positifs: Aucun pas d'action de score ou rejet.
     - utilisation services externes: non
     - Réference: https://rspamd.com/doc/modules/milter_headers.html
+  - **Mime types**: 
+    - Description: Permet de verifier:
+       - si le mime type est dans la liste "maps.d/mime_types.inc" => Symbole: MIME_GOOD/MIME_BAD/MIME_UNKNOWN
+       - si une piece jointe à l'extension en relation avec son "mime-type" => Symbole: 	MIME_BAD_ATTACHMENT
+       - si c'est une archive verifie à l'interieur que les types de fichiers présents => MIME_ARCHIVE_IN_ARCHIVE
+       - si il contient un pattern suspect (type: "document.doc.exe") => MIME_DOUBLE_BAD_EXTENSION/MIME_BAD_UNICODE
+       - une politique personnalité (interdire les executables) => MIME_BAD_EXTENSION
+    - Fichier de configuration: "local.d/mime_types.conf"
+    - Activation: Oui
+    - Risque de faux positifs: Oui si quelqu'un vous transmet un piece jointe non autorisée par votre politique.
+    - utilisation services externes: non
+    - Réference: https://rspamd.com/doc/modules/mime_types.html
 #### Ecrire sa propre règle
 Avec RSPAMD, il est très facil d'ecrire sa propre règle, pour plus d'information: https://rspamd.com/doc/tutorials/writing_rules.html
 #### Tester vos règles
