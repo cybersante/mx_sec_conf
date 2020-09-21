@@ -240,9 +240,16 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
        - une politique personnalité (interdire les executables) => MIME_BAD_EXTENSION
     - Fichier de configuration: "local.d/mime_types.conf"
     - Activation: Oui
-    - Risque de faux positifs: Oui si quelqu'un vous transmet un piece jointe non autorisée par votre politique.
+    - Risque de faux positifs: Oui si quelqu'un vous transmet un piece jointe non autorisée par votre politique (si on peut appeler ca un faux positif...).
     - utilisation services externes: non
     - Réference: https://rspamd.com/doc/modules/mime_types.html
+  - **Multimap**: 
+    - Description: 
+    - Fichier de configuration: "local.d/multimap.conf"
+    - Activation: Oui
+    - Risque de faux positifs: 
+    - utilisation services externes: 
+    - Réference: https://rspamd.com/doc/modules/multimap.html
 #### Ecrire sa propre règle
 Avec RSPAMD, il est très facil d'ecrire sa propre règle, pour plus d'information: https://rspamd.com/doc/tutorials/writing_rules.html
 #### Tester vos règles
