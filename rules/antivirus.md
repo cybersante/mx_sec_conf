@@ -22,12 +22,21 @@ Le plus simple pour installer clamav est d'utiliser le docker qui emportera l'en
 Si vous ne connaissez pas encore la technologie docker, il est temps de s'y mettre: https://www.docker.com/ .   
 Si vous le souhaitez vous pouvez juste prendre le docker clamav et l'integrer dans votre solution existante.  
 Le docker inclus:
-  - la dernière version de clamav (au 22/09 - version 0.103.0), compilé en mode "hardening" (https://wiki.debian.org/Hardening), ce qui vous protegera à minima même si une faille memoire était découverte.  
-  - certaines signatures non officielles
-  - des règles yara spécifiques à la messagerie
+  - la dernière version de clamav (au 22/09 - version 0.103.0) compilée en mode "hardening" (https://wiki.debian.org/Hardening), ce qui vous protegera à minima même si une faille memoire était découverte;  
+  - certaines signatures non officielles;
+  - des règles yara spécifiques à la messagerie.
 #### Package
 Clamav est disponible sur les principales distributions linux. De plus vous pouvez utiliser les signatures non officielles qui sont aussi souvent disponibles.
 ### Fonctionnalités
+Clamav possède un outil de mise à jour des signatures nommé "freshclam".
 #### Signatures de base
+Il s'agit des signatures publiques editées par clamav
 #### Signatures non officielles
+Il s'agit des signatures publiques editées par des tiers (abuse.ch, malwarepatrol, ...).  
+Vous pouvez utiliser le script de mise à jour des signatures tiers inclus dans votre distribution ou https://github.com/extremeshok/clamav-unofficial-sigs .  
 #### Règles Yara
+La plupart des règles yara sont compatibles avec clamav, à l'exception de celles utilisant des modules yara spécifiques comme: math, pe, ...  
+Vous pouvez trouver des signatures yara sur de nombreux sites ou dépots, l'officiel est: https://github.com/Yara-Rules/rules .
+### Configuration
+Clamav s'integre dans Rspamd avec le daemon "clamd" via le fichier de configuration rspamd: "local.d/antivirus.conf".
+
