@@ -378,7 +378,7 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
     - utilisation services externes: Non
     - Réference: https://rspamd.com/doc/modules/whitelist.html
 #### Ecrire sa propre règle
-Avec RSPAMD, il est très facil d'ecrire sa propre règle, pour plus d'information: https://rspamd.com/doc/tutorials/writing_rules.html
+Avec RSPAMD, il est très facile d'écrire sa propre règle, pour plus d'informations: https://rspamd.com/doc/tutorials/writing_rules.html
 #### Tester vos règles
 Afin de tester vos règles et surtout assurer leurs bons fonctionnements, vous pouvez utiliser l'interface graphique avec un courriel qui contient votre contenu à détecter, et verifier le déclenchement de vos règles.
 ### Configuration
