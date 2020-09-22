@@ -244,12 +244,139 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
     - utilisation services externes: non
     - Réference: https://rspamd.com/doc/modules/mime_types.html
   - **Multimap**: 
-    - Description: 
+    - Description: Manipule les règles basées sur des listes qui sont mises à jour automatique via differents protocoles (http/https/resp/local/cdb) dont le contenu peut être varié (https://rspamd.com/doc/modules/multimap.html#map-types)
     - Fichier de configuration: "local.d/multimap.conf"
+    - Activation: Oui
+    - Risque de faux positifs: Oui selon les règles mises en place
+    - utilisation services externes: 
+      - Oui si la ressource est exterieur
+    - Réference: https://rspamd.com/doc/modules/multimap.html
+  - **MX check**: 
+    - Description: Verification que l'expediteur à un MX valide
+    - Symboles: MX_INVALID/MX_MISSING/MX_GOOD/MX_WHITE
+    - Fichier de configuration: "local.d/mx_check.conf"
+    - Activation: Oui
+    - Risque de faux positifs: Aucun, car un expediteur doit avoir un MX valide
+    - utilisation services externes: 
+      - Redis
+    - Réference: https://rspamd.com/doc/modules/mx_check.html
+  - **Neural Network**: 
+    - Description: Apprend les SPAM et HAM par reseau neuronal pour faire de la post-classification en fonction des symboles obtenus et des apprentisages précédents.
+    - Symboles: NEURAL_SPAM_LONG/NEURAL_SPAM_SHORT/NEURAL_HAM_LONG/NEURAL_HAM_SHORT
+    - Fichier de configuration: "local.d/neural.conf"
+    - Activation: Oui
+    - Risque de faux positifs: Non connu
+    - utilisation services externes: 
+      - Redis
+    - Réference: https://rspamd.com/doc/modules/neural.html
+  - **Phishing check**: 
+    - Description: permet plusieurs verifications:
+      - l'url dans un courriel pointe sur le meme domaine que celui visible => symbole: PHISHING
+      - l'url est connu dans une liste noire => symboles: PHISHED_PHISHTANK/PHISHED_OPENPHISH/PH_SURBL_MULTI
+      - l'url contient un chemin qui semble indiquer que le site est potentiellement compromis => symbole: 	HACKED_WP_PHISHING
+    - Fichier de configuration: "local.d/phishing.conf"
+    - Activation: Oui
+    - Risque de faux positifs: Oui si une personne indique une URL visible avec une URL réelle contenant un domaine different (mais cela est un très mauvaise pratique).
+    - utilisation services externes: 
+      - base de Threat Intel (phishtnak, openphish, surbl)
+    - Réference: https://rspamd.com/doc/modules/phishing.html
+  - **Rate limit**: 
+    - Description: Permet de limiter le nombre de message en provenance d'un expediteur.
+    - Fichier de configuration: "local.d/ratelimit.conf"
+    - Activation: Non
+    - Risque de faux positifs: Oui si un expediteur commence a transmettre beaucoup de courriel dans un laps de temps court.
+    - utilisation services externes:
+      - redis
+    - Réference: https://rspamd.com/doc/modules/ratelimit.html
+  - **RBL**: 
+    - Description: Verifie les éléments d'un courriel (ip, email, header, ...) par rapport à des RBL externes (sorbs, spamhaus, ...).
+    - Symboles: il y en a beaucoup donc regardez sur l'interface web par une recherche sur 'rbl'
+    - Fichier de configuration: "local.d/rbl.conf"
+    - Activation: Oui
+    - Risque de faux positifs: Oui si un expediteur légitime est en liste noire, mais normalement son service informatique fera le nécéssaire rapidement.
+    - utilisation services externes: 
+      - RBL externes
+    - Réference: https://rspamd.com/doc/modules/rbl.html
+  - **Regexp**: 
+    - Description: filtrage des messages par regexp, fonctions internes et code LUA.
+    - Fichier de configuration: "lua/rspamd.local.lua"
+    - Activation: Oui
+    - Risque de faux positifs: Selon la règle
+    - utilisation services externes: selon la règle
+    - Réference: https://rspamd.com/doc/modules/regexp.html
+  - **Reputation**: 
+    - Description: Verifie la réputation de certains objects contenus dans le courriel et ajuste le score.
+    - Fichier de configuration: 
+      - "local.d/reputation.conf"
+      - "local.d/url_reputation.conf"
+      - "local.d/ip_score.conf"
+    - Activation: Oui
+    - Risque de faux positifs: NC
+    - utilisation services externes: 
+      - Redis
+    - Réferences: 
+      - https://rspamd.com/doc/modules/reputation.html
+      - https://rspamd.com/doc/modules/url_reputation.html
+      - https://rspamd.com/doc/modules/ip_score.html
+  - **Received policy**: 
+    - Description: Verifie dans l'en-tête "received" la présence de mot clé suspect comme "dynamic" qui pourrait indiquer la compromission d'un compte.
+    - sumboles: ONCE_RECEIVED_STRICT/ONCE_RECEIVED
+    - Fichier de configuration: "local.d/once_received.conf"
+    - Activation: Oui
+    - Risque de faux positifs: Oui si dans receive il y a des mots clés (faible)
+    - utilisation services externes:  non
+    - Réference: https://rspamd.com/doc/modules/once_received.html
+  - **Replies mode**: 
+    - Description: permet d'identifier si le courriel contient une réponse à un courriel transmis par un utilisateur interne afin d'ameliorer le score.
+    - Symbole: REPLY
+    - Fichier de configuration: "local.d/replies.conf"
     - Activation: Oui
     - Risque de faux positifs: 
     - utilisation services externes: 
-    - Réference: https://rspamd.com/doc/modules/multimap.html
+    - Réference: https://rspamd.com/doc/modules/replies.html
+  - **SpamAssassin rules**: 
+    - Description: Réutilisation de règle spamassassin en natif dans rspamd.
+    - Fichier de configuration: 
+      - "local.d/spamassassin.conf"
+      - "custom/sa-rules"
+    - Activation: Oui
+    - Risque de faux positifs: Oui selon les règles.
+    - utilisation services externes: Non
+    - Réference: https://rspamd.com/doc/modules/spamassassin.html
+  - **SpamTrap**: 
+    - Description: Permet d'extraire des spams pour les apprendres et les filtrer selon l'adresse courriel ou le domaine.
+    - Fichier de configuration: 
+      - "local.d/spamtrap.conf"
+      - "maps.d/spamtrap.map" ou redis
+    - Activation: Non
+    - Risque de faux positifs: Selon votre regexp
+    - utilisation services externes: 
+      - redis si pas d'utilisation de map
+    - Réference: https://rspamd.com/doc/modules/spamtrap.html
+  - **SPF**: 
+    - Description: Verification de la légitimité du serveur d'expedition pour le domaine via SPF (https://fr.wikipedia.org/wiki/Sender_Policy_Framework)
+    - Symboles: R_SPF_FAIL/R_SPF_NEUTRAL/R_SPF_SOFTFAIL/R_SPF_ALLOW/R_SPF_DNSFAIL
+    - Fichier de configuration: "local.d/spf.conf"
+    - Activation: Oui
+    - Risque de faux positifs: Aucun car il respecte les intructions de l'expediteur (son enregistrement SPF), si malgré tout votre expediteur n'est pas doué, vous pouvez ajouter son adresse IP en liste blanche SPF.
+    - utilisation services externes: 
+      - DNS pour la requete SPF
+    - Réference: https://rspamd.com/doc/modules/spf.html
+  - **URL redirector**: 
+    - Description: Le mode va verifier si l'URL contenu dans un courriel est une redirection (code web 302).
+    - Fichier de configuration: "local.d/url_redirector.conf"
+    - Activation: Non
+    - Risque de faux positifs: Oui, car de nombreuses structures utilisent des outils de statistique qui cause une redirection.
+    - utilisation services externes: 
+      - Requete web vers l'URL pour identifier le code (200/302/...)
+    - Réference: https://rspamd.com/doc/modules/url_redirector.html
+  - **Whitelist**: 
+    - Description: permet de monter ou descendre le score selon des listes blanches.
+    - Fichier de configuration: "local.d/whitelist.conf"
+    - Activation: Oui
+    - Risque de faux positifs: Selon les règles (peut surtout causer du faux négatif).
+    - utilisation services externes: Non
+    - Réference: https://rspamd.com/doc/modules/whitelist.html
 #### Ecrire sa propre règle
 Avec RSPAMD, il est très facil d'ecrire sa propre règle, pour plus d'information: https://rspamd.com/doc/tutorials/writing_rules.html
 #### Tester vos règles
