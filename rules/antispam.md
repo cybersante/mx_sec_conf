@@ -1,15 +1,11 @@
 # Mise en place d'une solution AntiSpam
-Tests ACSS concernés n°: 5, 6, 7
+Tests ACSS concernés n°: 5, 6, 7  
 Date Creation: 18/09/2020  
 Date dernière mise à jour: 18/09/2020  
 Facilité de mise en place: Simple ~~/ Moyen / Complexe~~  
 
 Les exemples de configuration (ci-dessous) sont basés sur rspamd (https://rspamd.com/).  
 Si vous ne souhaitez pas utiliser RSPAMD, vous pouvez vous en inspirer pour l'adapter à votre solution de protection de messagerie.
-
-Règles:
-1. [Let's get started with Rspamd!](#instal)
-2. [GTUBE](#gtube)
 
 
 ##  Let's get started! <a name="instal"></a>
@@ -409,15 +405,3 @@ Si vous utilisez notre docker-compose, alors vous pouvez integrer à postfix dan
 #### Configuration de RSPAMD dans un autre MTA
 Vous trouverez dans le lien suivant, les informations pour integrer RSPAMD dans votre MTA: https://rspamd.com/doc/integration.html .
 
-## GTUBE <a name="gtube"></a>
-### Description
-Cette règle permet d'éviter que tout le monde puisse utiliser votre serveur de messagerie pour transmettre des courriels afin d'éviter les risques suivants:
-  - Utilisation de ressources illégitimement;
-  - Mise en liste noire de vos serveurs;
-  - Usurpation d'identité.
-(https://fr.wikipedia.org/wiki/Open_relay)
-### Exemple de configuration
-Les valeurs à verifier sont dans les variables "smtpd_recipient_restrictions", "smtpd_relay_restrictions" et "smtpd_sender_restrictions" (du fichier "/etc/postifx/main.cf"), celles-ci doivent restreindre à votre reseau "permit_mynetworks" et potentiellement à une authentifiction "permit_sasl_authenticated".
-Vous trouverez plus de renseignement sur ce lien http://www.postfix.org/SMTPD_ACCESS_README.html .
-### Faux positifs
-Pas de faux positif connu.
