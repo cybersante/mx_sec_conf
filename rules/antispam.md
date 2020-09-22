@@ -173,6 +173,15 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
     - utilisation services externes:
       - Redis 
     - Réference: https://rspamd.com/doc/modules/greylisting.html
+  - **Hfilter*: 
+    - Description: Verification DNS sur les éléments: from, rcpt, mid, helo, url.
+    - Symboles: recherche 'hfilter' dans l'interface web/symbols.
+    - Fichier de configuration: "local.d/hfilter.conf"
+    - Activation: Oui
+    - Risque de faux positifs: Configurer les scores de manière juste.
+    - utilisation services externes:
+      - Requetes DNS
+    - Réference: https://rspamd.com/doc/modules/hfilter.html
   - **Redis history**: 
     - Description: Stock l'historique dans redis afin de pouvoir l'analyser dans l'interface web (limite en profondeur).
     - Fichier de configuration: "local.d/history_redis.conf"
