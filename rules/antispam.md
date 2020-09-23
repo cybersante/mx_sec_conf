@@ -376,7 +376,7 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
       - Requete web vers l'URL pour identifier le code (200/302/...)
     - Réference: https://rspamd.com/doc/modules/url_redirector.html
   - **Whitelist**: 
-    - Description: permet de monter ou descendre le score selon des listes blanches.
+    - Description: permet de monter ou descendre le score selon des listes blanches pour le SPF/DKIM/DMARC.
     - Fichier de configuration: "local.d/whitelist.conf"
     - Activation: Oui
     - Risque de faux positifs: Selon les règles (peut surtout causer du faux négatif).
