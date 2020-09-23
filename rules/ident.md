@@ -1,5 +1,5 @@
 # Règles de protection contre l'usurpation d'identité
-Tests ACSS concernés n°: 1  
+Tests ACSS concernés n°: 70,79,80,81,85,98,99,102,105,108,119,120  
 Date Creation: 22/09/2020  
 Date dernière mise à jour: 22/09/2020  
 Facilité de mise en place: Simple ~~/ Moyen / Complexe~~  
@@ -65,9 +65,9 @@ Voici les principales vérifications à effectuer:
   - Emeteur qui n'est pas conforme à l'enregistrement ARC
     - Symbole: ARC_INVALID
   - l'ID de message (s'il y en a un) peut contenir des anomalies suspectes:
-    - Symboles: !MID_RHS_MATCH_FROM/MID_CONTAINS_FROM
+    - Symboles: MISSING_MID/MID_DOMAIN_NEQ_FROM_DOMAIN/MID_CONTAINS_FROM/MID_RHS_NOT_FQDN/
   - Le FROM de l'enveloppe et le FROM du contenu peuvent avoir des anomalies pour tromper le recepteur:
-    - Symboles: FROM_NEQ_ENVFROM / FORGED_SENDER / MISSING_FROM / MULTIPLE_FROM
+    - Symboles: FROM_NEQ_ENVFROM / FORGED_SENDER / MISSING_FROM / MULTIPLE_FROM / MULTIPLE_UNIQUE_HEADERS / FROM_EXCESS_BASE64 / FROM_EXCESS_QP
   - LE 'display name' (le nom qui apparait à la place de l'adresse brute) peut avoir des éléments suseptibles d'être trompeur:
     - Symboles: SPOOF_DISPLAY_NAME / FROM_NAME_HAS_TITLE / FROM_DN_EQ_ADDR / FROM_NAME_EXCESS_SPACE / FROM_HAS_DN
   - Le FROM contient des caractères illisibles ou spécifiques:
