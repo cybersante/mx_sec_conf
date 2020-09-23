@@ -107,16 +107,34 @@ Il est très suspect d'avoir du vbscript dans un fichier HTML, cependant vous po
 #### XML
 L'utilisation de XXE légitime dans un XML doit être très rare, cependant vous pouvez désactiver dans le fichier "xxe.yara", et nous sommes interessé pour connaitre les faux positifs afin de pouvoir potentiellement ameliorer la règle.
 
-## Filtrer les pièces jointes susceptibles d'être dangereuses <a name="filter"></a>
+## Filtrer les pièces jointes susceptibles d'être dangereuses <a name="filter2"></a>
 ### Description
 Cette règle permet de filtrer les courriels contant une piece jointe autorisée qui pourrait permettre de contourner vos protections.
 Les extensions les plus utilisées par les pirates sont les suivantes:
-  - zip/archive avec mot de passe contenu dans le courriel
+  - zip/archive:
+    - avec mot de passe contenu dans le courriel
+    - qui contient un très gros fichier qui dépasse le seuil de scan
+    - qui contient un nombre de fichiers qui dépasse le seuil de scan
+    - qui contient une "enfilade" de zip qui dépasse le seuil de scan
   - rtf (souvent renommé en .doc) avec obfuscation sur son en-tête afin que vos protections n'identifie pas qu'il s'agit d'un fichier RTF.
   - office avec mot de passe contenu dans le courriel
   - pdf avec mot de passe contenu dans le courriel
   - courriel attaché (eml, msg) contenant l'élement malicieux
 ### Exemple de configuration
+Il existe plusieurs possibilités pour effectuer ces filtrages:
+  - Clamav:
+    - Par défaut clamav scan l'interieur des fichiers courriels (eml, msg) alors que RSPAMD ne gère que eml et il est facile de contourner sa détection "eml" (voir l'issue: https://github.com/rspamd/rspamd/issues/3487).
+    - Clamd.conf avec "AlertEncrypted yes" et Symboles RSPAMD: "CLAM_DETECT_ENCRYPTED" et "CLAM_DETECT_ENCRYPTED_WITH_PASS"
+      - filtrage documents (pdf, office) avec mot de passe et zip avec mot de passe
+    - Clamd.conf avec "AlertExceedsMax yes" et "local.d/antivirus.conf" avec "patterns_fail" puis déclenchement sur symbole RSPAMD "CLAM_EXCEEDED" ("local.d/composites.conf"):
+      - Filtrage archive:
+        - qui contient un très gros fichier qui dépasse le seuil de scan
+        - qui contient un nombre de fichiers qui dépasse le seuil de scan
+        - qui contient une "enfilade" de zip qui dépasse le seuil de scan
+    - Règle Yara "office.yara" dans clamav va détecter tous les risques liés à l'obfuscation de rtf.
+  - RSPAMD:
+    - Symbole "MIME_ARCHIVE_IN_ARCHIVE"
+      - Filtrage archive qui contient une "enfilade" de zip qui dépasse le seuil de scan
 
 ### Faux positifs
-Pas de faux positif connu.
+Pour les documents et zip avec mot de passe, vous pouvez baisser le score "CLAM_DETECT_ENCRYPTED" et maintenir un score élevé sur "CLAM_DETECT_ENCRYPTED_WITH_PASS" qui indique qu'une pièce jointe est avec un mot de passe, et qu'un mot de passe semble être dans le corp du message.
