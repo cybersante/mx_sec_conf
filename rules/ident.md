@@ -64,8 +64,8 @@ Voici les principales vérifications à effectuer:
     - Symboles: DMARC_POLICY_ALLOW_WITH_FAILURES / DMARC_POLICY_REJECT / DMARC_POLICY_QUARANTINE / DMARC_POLICY_SOFTFAIL
   - Emeteur qui n'est pas conforme à l'enregistrement ARC
     - Symbole: ARC_INVALID
-  - l'ID de message (s'il y en a un) à un nom de domaine differents de l'expediteur:
-    - 
+  - l'ID de message (s'il y en a un) peut contenir des anomalies suspectes:
+    - Symboles: !MID_RHS_MATCH_FROM/MID_CONTAINS_FROM
   - Le FROM de l'enveloppe et le FROM du contenu peuvent avoir des anomalies pour tromper le recepteur:
     - Symboles: FROM_NEQ_ENVFROM / FORGED_SENDER / MISSING_FROM / MULTIPLE_FROM
   - LE 'display name' (le nom qui apparait à la place de l'adresse brute) peut avoir des éléments suseptibles d'être trompeur:
@@ -73,7 +73,7 @@ Voici les principales vérifications à effectuer:
   - Le FROM contient des caractères illisibles ou spécifiques:
     - Symbole: INVALID_FROM_8BIT
   - Réputation du FROM (attention il ne s'agit plus vraiment de verifier l'usurpation d'identité):
-    - 
+    - Symboles: RBL_MAILSPIKE_*/RBL_SPAMHAUS_*/RBL_SENDERSCORE/RBL_BLOCKLISTDE/RBL_SEM/RBL_NIXSPAM/RBL_VIRUSFREE_BOTNET
 ### Faux positifs
 Voici les principaux risques de faux positifs selon les règles: 
   - Domaine qui n'existe pas ou qui n'a pas de MX (donc pas de possibilité de réponse):
