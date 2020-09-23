@@ -45,7 +45,7 @@ Vous trouverez plus d'informations sur le lien suivant: https://stackoverflow.co
 ### Faux positifs
 Pas de faux positif connu.
 
-## Haute disponibilité <a name="in"></a>
+## Verifier l'identité des courriels entrants <a name="in"></a>
 ### Description
 Cette règle permet de verifier qu'un courriel entrant n'a pas une identité usurpée.
 ### Exemple de configuration
