@@ -81,9 +81,11 @@ Il existe plusieurs possibilités pour effectuer ces filtrages:
     - A ce jour (23/09/2020), olefy ne gère pas les fichiers RTF alors que oletools sait les analyser. Il est donc possible que prochainement, l'analyse de RTF soit possible avec olefy.
   - PDF:
     - Règle YARA "pdf.yara" dans clamav va détecter tous les risques liés aux pdf: fileexport, EmbeddedFiles ,XFA & JS, JS, structure PDF invalide, metadata suspect.
-  - javascript:
+  - javascript & HTML:
     - Règle YARA "javascript.yara" dans clamav va détecter tous les risques liés au javascript: obfuscation, fonctions à risque: ActiveX, eval, connexion http(s).
-  - 
+    - Règle YARA "vb.yara" dans clamav va détecter tous les risques liés au vbscript dans html: obfuscation, fonctions à risque: ActiveX, eval, connexion http(s).
+  - XML:
+    - Règle YARA "xml.yara" dans clamav va détecter tous les risques liés au XML: XXE (https://en.wikipedia.org/wiki/XML_external_entity_attack).
 ### Faux positifs
 #### Macro office
 Il est très rare de voir des fichiers office avec du DDE ou ppaction. Par contre, on peut trouver des macros, mais la encore rarement des macros avec de l'obfuscation ou appelant des fonctions de téléchargement ou d'écriture sur le disque.  
@@ -98,10 +100,12 @@ Si vous identifiez une règle qui cause trop de faux positif, vous pouvez la dé
 #### PDF
 Il est possible de voir des PDF avec du javascript (surement sur des documents que l'on peut remplir), par contre il est très rare de voir des fichiers inserés, de l'exportfile ou des structures invalides (utilisés pour contourner ou cve).  
 Si vous identifiez une règle qui cause trop de faux positif, vous pouvez la désactiver dans le fichier "pdf.yara", et nous sommes interessé pour la connaitre afin de pouvoir potentiellement l'ameliorer.
-#### Javascript
+#### Javascript & HTML
 Il est possible d'avoir du javascript attaché à un courriel, mais il est suspect d'utiliser des fonctions ActiveX, eval(), ou de connexion http(s).  
 Si vous identifiez une règle qui cause trop de faux positif, vous pouvez la désactiver dans le fichier "javascript.yara", et nous sommes interessé pour la connaitre afin de pouvoir potentiellement l'ameliorer.
+Il est très suspect d'avoir du vbscript dans un fichier HTML, cependant vous pouvez désactiver dans le fichier "vb.yara", et nous sommes interessé pour connaitre les faux positifs afin de pouvoir potentiellement ameliorer la règle.
 #### XML
+L'utilisation de XXE légitime dans un XML doit être très rare, cependant vous pouvez désactiver dans le fichier "xxe.yara", et nous sommes interessé pour connaitre les faux positifs afin de pouvoir potentiellement ameliorer la règle.
 
 ## Filtrer les pièces jointes susceptibles d'être dangereuses <a name="filter"></a>
 ### Description
