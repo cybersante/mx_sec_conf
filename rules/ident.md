@@ -69,7 +69,7 @@ Voici les principales vérifications à effectuer:
   - Le FROM de l'enveloppe et le FROM du contenu peuvent avoir des anomalies pour tromper le recepteur:
     - Symboles: FROM_NEQ_ENVFROM / FORGED_SENDER / MISSING_FROM / MULTIPLE_FROM / MULTIPLE_UNIQUE_HEADERS / FROM_EXCESS_BASE64 / FROM_EXCESS_QP
   - LE 'display name' (le nom qui apparait à la place de l'adresse brute) peut avoir des éléments suseptibles d'être trompeur:
-    - Symboles: SPOOF_DISPLAY_NAME / FROM_NAME_HAS_TITLE / FROM_DN_EQ_ADDR / FROM_NEQ_DISPLAY_NAME / FROM_NAME_EXCESS_SPACE / FROM_HAS_DN
+    - Symboles: SPOOF_DISPLAY_NAME / FROM_NAME_HAS_TITLE / FROM_DN_EQ_ADDR / FROM_NEQ_DISPLAY_NAME / FROM_NAME_EXCESS_SPACE / FROM_HAS_DN / SUSPECT_DISPLAY_NAME
   - Le FROM contient des caractères illisibles ou spécifiques:
     - Symbole: INVALID_FROM_8BIT
   - Réputation du FROM (attention il ne s'agit plus vraiment de verifier l'usurpation d'identité):
