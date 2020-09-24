@@ -72,6 +72,8 @@ Voici les principales vérifications à effectuer:
     - Symboles: SPOOF_DISPLAY_NAME / FROM_NAME_HAS_TITLE / FROM_DN_EQ_ADDR / FROM_NEQ_DISPLAY_NAME / FROM_NAME_EXCESS_SPACE / FROM_HAS_DN / SUSPECT_DISPLAY_NAME
   - Le FROM contient des caractères illisibles ou spécifiques:
     - Symbole: INVALID_FROM_8BIT
+  - L'en-tête "X-Originating-IP" correspond à l'adresse IP de l'expediteur réel (ajouté sur certains webmail), il peut permettre d'identifier un compte webmail compromis:
+    - Symbole: "HAS_XOIP"
   - Réputation du FROM (attention il ne s'agit plus vraiment de verifier l'usurpation d'identité):
     - Symboles: RBL_MAILSPIKE_*/RBL_SPAMHAUS_*/RBL_SENDERSCORE/RBL_BLOCKLISTDE/RBL_SEM/RBL_NIXSPAM/RBL_VIRUSFREE_BOTNET
 ### Faux positifs
@@ -97,6 +99,8 @@ Voici les principaux risques de faux positifs selon les règles:
    - Une solution en cas de faux positifs importants est d'utiliser ce symbols dans un "composite" RSPAMD afin de lui donner plus de contexte pour eviter les faux positifs.
   - Le FROM contient des caractères illisibles ou spécifiques:
    - Les faux positifs devrait être très faible.
+  - L'en-tête "X-Originating-IP"
+   - il est peu probable d'avoir une adresse IP dans (sauf télétravail à l'étrangé). Pour les domaines FROM en .com/.net/.org, il n'est pas possible de connaitre le pays d'origine.
   - Réputation du FROM (attention il ne s'agit plus vraiment de verifier l'usurpation d'identité):
     - Les faux positifs devrait être très faible, seulement liés aux adresses courriels légitimes ayant été compromises mais pas encore "délisté".
 Selon le score que vous allez mettre, il peut y avoir des faux positifs, il vaut mieux donc tester la règle sur le "worker" de test pour identifier les risques de faux positifs avant d'activer en production.
