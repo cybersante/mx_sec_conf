@@ -20,7 +20,7 @@ Cette technique est relativement facile à détecter:
      - la signature: 'support', 'helpdesk', 'admin', ...
 
 ### Exemple de configuration
-Nous avons créer un composite ('local.d/composites.conf') pour créer cette règle sur le symbole: "".  
+Nous avons créer un composite ('local.d/composites.conf') pour créer cette règle sur le symbole: "PHISHING_REPLY".  
 Vous pouvez aussi utilisez les symboles suivants:  
   - REPLYTO_DOM_NEQ_FROM_DOM: Le domaine reply-to est different du domaine FROM;
   - FREEMAIL_REPLYTO: le courriel utilisé dans reply-to est une adresse gratuite
