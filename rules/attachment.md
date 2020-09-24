@@ -123,7 +123,7 @@ Les extensions les plus utilisées par les pirates sont les suivantes:
 ### Exemple de configuration
 Il existe plusieurs possibilités pour effectuer ces filtrages:
   - Clamav:
-    - Par défaut clamav scan l'interieur des fichiers courriels (eml, msg) alors que RSPAMD ne gère que eml et il est facile de contourner sa détection "eml" (voir l'issue: https://github.com/rspamd/rspamd/issues/3487). C'est pour cela que nous avons ajouter des règles yara pour détecter les types de fichiers interdits (PE, ...), pour ce faire regarder dans le repertoire "data/conf/clamav-rules/".
+    - Par défaut clamav scan l'interieur des fichiers courriels (eml, msg) alors que RSPAMD ne gère que eml et il est facile de contourner sa détection "eml" (voir l'issue: https://github.com/rspamd/rspamd/issues/3487). C'est pour cela que nous avons ajouté des règles yara pour détecter les types de fichiers interdits (PE, ...), pour plus d'informations regardez dans le repertoire "data/conf/clamav-rules/".
     - Clamd.conf avec "AlertEncrypted yes" et Symboles RSPAMD: "CLAM_DETECT_ENCRYPTED" et "CLAM_DETECT_ENCRYPTED_WITH_PASS"
       - filtrage documents (pdf, office) avec mot de passe et zip avec mot de passe
     - Clamd.conf avec "AlertExceedsMax yes" et "local.d/antivirus.conf" avec "patterns_fail" puis déclenchement sur symbole RSPAMD "CLAM_EXCEEDED" ("local.d/composites.conf"):
