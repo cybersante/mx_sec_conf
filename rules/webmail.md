@@ -34,6 +34,7 @@ Il faut faire passer le flux de sortie (du webmail vers internet) par une instan
   - interdire les URL suspectes.
   
 De plus, il faut limiter le nombre d'envoi d'un utilisateur à la minute (généralement, l'attaquant utilise un script qui va générer un flux très important sur un laps de temps court).  
-Vous pouvez utiliser le module rate_limit de RSPAMD pour realiser cette action (https://rspamd.com/doc/modules/ratelimit.html).
+Vous pouvez utiliser le module rate_limit de RSPAMD pour realiser cette action (https://rspamd.com/doc/modules/ratelimit.html).  
+Vous pouvez aussi utiliser les options internes de votre webmail qui souvent proposent ce type d'option.  
 ### Faux positifs
 Pas de faux positif connu.
