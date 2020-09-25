@@ -1,5 +1,5 @@
 # Règles de protection contre le phishing par réponse courriel
-Tests ACSS concernés n°: 78
+Tests ACSS concernés n°: 78  
 Date Creation: 24/09/2020  
 Date dernière mise à jour: 24/09/2020  
 Facilité de mise en place: Simple ~~/ Moyen / Complexe~~  
