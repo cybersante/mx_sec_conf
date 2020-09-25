@@ -7,6 +7,8 @@ Facilité de mise en place: Simple ~~/ Moyen / Complexe~~
 Les exemples de configuration (ci-dessous) sont basés sur rspamd (https://rspamd.com/).  
 Si vous ne souhaitez pas utiliser RSPAMD, vous pouvez vous en inspirer pour l'adapter à votre solution de protection de messagerie.
 
+1. [Let's get started!](#instal)
+2. [Ce que nous avons ajouté](#add)
 
 ##  Let's get started! <a name="instal"></a>
 Attention, cette documentation n'a pas pour objectif de vous expliquer en detail les possibilités offertent par Rspamd.  
@@ -414,3 +416,4 @@ Si vous utilisez notre docker-compose, alors vous pouvez integrer à postfix dan
 #### Configuration de RSPAMD dans un autre MTA
 Vous trouverez dans le lien suivant, les informations pour integrer RSPAMD dans votre MTA: https://rspamd.com/doc/integration.html .
 
+## Ce que nous avons ajouté <a name="add"></a>
