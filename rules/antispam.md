@@ -23,7 +23,11 @@ Nous vous proposons une configuration RSPAMD modifié en provenance de la messag
 #### Package
 Rspamd est disponible sur les principales distributions linux (https://rspamd.com/downloads.html). Cependant il faudra installer les outils annexes aussi (redis, clamav, ...).
 ### Fonctionnalités
-Comme indiqué plus haut, je vous donne la majorité des fonctionnalités du produit Rspamd (version 2.5) sans rentrer dans le detail, pour plus d'informations suivez le lien...
+Comme indiqué plus haut, je vous donne la majorité des fonctionnalités du produit Rspamd (version 2.6) sans rentrer dans le detail, pour plus d'informations suivez le lien...  
+  
+Petites informations importantes à savoir sur les options générales ('override.d/worker-normal.inc') :
+  - Un module ou un tache de verification que vous allez programmer à un temps maximum pour s'executer (par défaut 8s), mais certaines taches demandes plus. Vous pouvez changer ca avec la variable "task_timeout".
+  - Une courriel ne peut pas générer plus de 64 requètes DNS (par défaut). Vous pouvez augmenter cette valeur avec la variable "dns_max_requests".
 #### Scores, Actions, Symboles et Combinaisons
 Rspamd offre des règles internes (définies par des symboles 'SYMBOLS' que vous pouvez retrouver sur l'interface graphique de RSPAMD en haut afin d'identifier l'ensemble des possibilités offertent par défaut). Il est possible dans le fichier "local.d/composites.conf" de créer des règles en combinant des 'SYMBOLS'. Vous pouvez aussi créer des symboles pour générer de nouvelles règles, ces nouveaux symboles seront alors visibles dans l'interface graphique de RSPAMD.
 
@@ -31,6 +35,7 @@ Pour chaque symbole on définie un score. Si le courriel déclenche un symbole (
 Pour plus d'informations: 
   - https://rspamd.com/doc/configuration/composites.html
   - https://rspamd.com/doc/configuration/metrics.html
+
 #### Les modules
 Vous pourrez trouver les configurations par default de RSPAMD sur github: https://github.com/rspamd/rspamd/tree/master/conf .  
 
