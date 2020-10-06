@@ -18,7 +18,7 @@ Pour ce faire, nous vous invitons à aller sur leur site (https://rspamd.com/doc
 #### Docker
 Le plus simple pour installer RSPAMD est d'utiliser un docker qui emportera l'ensemble des éléments nécéssaires à son bon fonctionnement (redis, olefy, clamav, ...).  
 Si vous ne connaissez pas encore la technologie docker, il est temps de s'y mettre: https://www.docker.com/ .  
-Nous vous proposons une configuration RSPAMD modifié en provenance de la messagerie "Mailcow" (https://github.com/mailcow/mailcow-dockerized), mais vous restez libre d'utiliser une autre source (il en existe beaucoup sur github):
+Nous vous proposons une configuration RSPAMD modifiée en provenance de la messagerie "Mailcow" (https://github.com/mailcow/mailcow-dockerized), mais vous restez libre d'utiliser une autre source (il en existe beaucoup sur github):
  - [Docker-compose Rspamd](rules/antispam.md)
 #### Package
 Rspamd est disponible sur les principales distributions linux (https://rspamd.com/downloads.html). Cependant il faudra installer les outils annexes aussi (redis, clamav, ...).
@@ -26,8 +26,8 @@ Rspamd est disponible sur les principales distributions linux (https://rspamd.co
 Comme indiqué plus haut, je vous donne la majorité des fonctionnalités du produit Rspamd (version 2.6) sans rentrer dans le detail, pour plus d'informations suivez le lien...  
   
 Petites informations importantes à savoir sur les options générales ('override.d/worker-normal.inc') :
-  - Un module ou un tache de verification que vous allez programmer à un temps maximum pour s'executer (par défaut 8s), mais certaines taches demandes plus. Vous pouvez changer ca avec la variable "task_timeout".
-  - Une courriel ne peut pas générer plus de 64 requètes DNS (par défaut). Vous pouvez augmenter cette valeur avec la variable "dns_max_requests".
+  - Un module ou une tache de verification que vous allez programmer à un temps maximum pour s'executer (par défaut 8s), mais certaines taches demandes plus. Vous pouvez changer cela avec la variable "task_timeout".
+  - Un courriel ne peut pas générer plus de 64 requètes DNS (par défaut). Vous pouvez augmenter cette valeur avec la variable "dns_max_requests".
 #### Scores, Actions, Symboles et Combinaisons
 Rspamd offre des règles internes (définies par des symboles 'SYMBOLS' que vous pouvez retrouver sur l'interface graphique de RSPAMD en haut afin d'identifier l'ensemble des possibilités offertent par défaut). Il est possible dans le fichier "local.d/composites.conf" de créer des règles en combinant des 'SYMBOLS'. Vous pouvez aussi créer des symboles pour générer de nouvelles règles, ces nouveaux symboles seront alors visibles dans l'interface graphique de RSPAMD.
 
@@ -60,7 +60,7 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
     - Description: Récuperation d'informations sur l'adresse IP => ANS, Subnet, Pays; pour être utilisées par les autres modules.
     - Fichier de configuration: "local.d/asn.conf"
     - Activation: Oui
-    - Risque de faux positifs: Aucun pas d'action directe
+    - Risque de faux positifs: Aucun, pas d'action directe
     - utilisation services externes:
       - REDIS: Non
       - Serveur RSPAMD: asn.rspamd.com & asn6.rspamd.com
@@ -69,7 +69,7 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
     - Description: Netoyages des statistiques balaysiennes
     - Fichier de configuration: "local.d/statistic.conf" (depuis la version 2.0)
     - Activation: Oui
-    - Risque de faux positifs: Aucun pas d'action directe
+    - Risque de faux positifs: Aucun pas, d'action directe
     - utilisation services externes:
       - REDIS: oui
     - Réference: https://rspamd.com/doc/modules/bayes_expiry.html
@@ -77,12 +77,12 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
     - Description: Permet de créer un tableau de bord sur une base "clickhouse" afin d'analyser les statistiques générées par RSPAMD.
     - Fichier de configuration: "local.d/clickhouse.conf"
     - Activation: Oui
-    - Risque de faux positifs: Aucun pas d'action directe
+    - Risque de faux positifs: Aucun, pas d'action directe
     - utilisation services externes: 
       - Clickhouse: https://clickhouse.tech/#quick-start
     - Réference: https://rspamd.com/doc/modules/clickhouse.html
   - **Chartable**: 
-    - Description: Il regarde dans chaque mot s'il y a beaucoup de transition entre des lettres en ASCII et non ASCII.
+    - Description: Il regarde dans chaque mot s'il y a beaucoup de transitions entre des lettres en ASCII et non ASCII.
     - Symbole de resultat: "R_MIXED_CHARSET"
     - Fichier de configuration: "local.d/chartable.conf" (pour désactiver: "enabled = false;")
     - Activation: Oui par defaut
@@ -90,11 +90,11 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
     - utilisation services externes: Aucun
     - Réference: https://rspamd.com/doc/modules/chartable.html  
   - **DCC**:
-    - Description: DCC identifie via le checksum d'un message transmis à leur serveur si le message à été transmis en mass ou non.
+    - Description: DCC identifie via le checksum d'un message transmis à leur serveur si le message à été transmis en masse ou non.
     - Symbole de resultat: "DCC_\*"
     - Fichier de configuration: "local.d/dcc.conf" 
     - Activation: Non
-    - Risque de faux positifs: Oui, une campagne de pub pourrait être considérée comme un spam car de nombreux utilisateurs vont recevoir le même courriel. Si vous l'activé limiter le score des symboles "DCC_\*" afin d'eviter des faux positifs
+    - Risque de faux positifs: Oui, une campagne de pub pourrait être considérée comme un spam car de nombreux utilisateurs vont recevoir le même courriel. Si vous l'activez, limitez le score des symboles "DCC_\*" afin d'eviter des faux positifs
     - utilisation services externes:
       - Dockerfile DCC possible: https://github.com/Neomediatech/dcc-docker/blob/master/Dockerfile
       - Utilise les ressources des serveurs DCC: https://www.dcc-servers.net/dcc/#public-servers
@@ -131,7 +131,7 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
     - Description: Permet de créer un tableau de bord sur une base "elasticsearch via kibana" afin d'analyser les statistiques générées par RSPAMD.
     - Fichier de configuration: "local.d/elastic.conf"
     - Activation: Non
-    - Risque de faux positifs: Aucun pas d'action directe
+    - Risque de faux positifs: Aucun, pas d'action directe
     - utilisation services externes: 
       - elasticsearch
     - Réference: https://rspamd.com/doc/modules/elastic.html
@@ -139,7 +139,7 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
     - Description: Permet d'integrer l'analyse d'outils exterieurs (oletools, pyzor, razor, virustotal, ,...)
     - Fichier de configuration: "local.d/external_services.conf"
     - Activation: Oui pour oletools
-    - Risque de faux positifs: Oui si des utilisateurs exterieurs s'échangent des documents offices avec du contenu "macro", mieux vaut eviter d'autoriser cela dans tous les cas.
+    - Risque de faux positifs: Oui si des utilisateurs exterieurs s'échangent des documents Office avec du contenu "macro", mieux vaut eviter d'autoriser cela dans tous les cas.
     - utilisation services externes: 
       - Olefy (integré au docker)
       - Possibilité de créer son module externe, exemple: https://github.com/Neomediatech/rspamd/blob/master/conf/plugins.d/pyzor.lua
@@ -148,7 +148,7 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
     - Description: Permet de forcer une action lors du déclenchement d'un symbole.
     - Fichier de configuration: "local.d/force_actions.conf"
     - Activation: Oui
-    - Risque de faux positifs: Oui, il y a toujours un risque si vous forcer en rejet sur un symbole...
+    - Risque de faux positifs: Oui, il y a toujours un risque si vous forcez en rejet sur un symbole...
     - utilisation services externes:
     - Réference: https://rspamd.com/doc/modules/force_actions.html
   - **Fuzzy check**: 
@@ -167,7 +167,7 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
     - Description: Collecte de fuzzy hash en provenance d'autres instances afin de les propager dans le cluster
     - Fichier de configuration: "local.d/fuzzy_check.conf"
     - Activation: Oui
-    - Risque de faux positifs: Aucun pas d'action directe
+    - Risque de faux positifs: Aucun, pas d'action directe
     - utilisation services externes:
       - Redis ("override.d/worker-fuzzy.inc") - Symboles: (LOCAL_FUZZY_DENIED, LOCAL_FUZZY_PROB, LOCAL_FUZZY_WHITE, LOCAL_FUZZY_UNKNOWN)
       - bl.rspamd.com (Symboles: FUZZY_DENIED, FUZZY_PROB, FUZZY_WHITE, FUZZY_UNKNOWN)
@@ -176,7 +176,7 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
     - Description: https://fr.wikipedia.org/wiki/Greylisting
     - Fichier de configuration: "local.d/greylist.conf"
     - Activation: Oui
-    - Risque de faux positifs: Oui, mais très faible car vous rejetez que temporairement le courriel. Le seul risque est d'avoir une campagne de courriels légitimes transmis par un tiers qui n'utilise pas un serveur de messagerie et dont le script d'envoi ne sera pas traiter la demande d'attente de renvoie (dans ce cas mieux vaut indiquer à ce tiers d'utiliser correctement le protocole de messagerie).
+    - Risque de faux positifs: Oui, mais très faible car vous rejetez que temporairement le courriel. Le seul risque est d'avoir une campagne de courriels légitimes transmis par un tiers qui n'utilise pas un serveur de messagerie et dont le script d'envoi ne sera pas traiter la demande d'attente de renvoi (dans ce cas mieux vaut indiquer à ce tiers d'utiliser correctement le protocole de messagerie).
     - utilisation services externes:
       - Redis 
     - Réference: https://rspamd.com/doc/modules/greylisting.html
@@ -193,7 +193,7 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
     - Description: Stock l'historique dans redis afin de pouvoir l'analyser dans l'interface web (limite en profondeur).
     - Fichier de configuration: "local.d/history_redis.conf"
     - Activation: Oui
-    - Risque de faux positifs: Aucun pas d'action directe
+    - Risque de faux positifs: Aucun, pas d'action directe
     - utilisation services externes:
       - Redis 
     - Réference: https://rspamd.com/doc/modules/history_redis.html
@@ -209,7 +209,7 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
       - Par exemple on peut vouloir transmettre les courriels bloqués par l'antivirus vers une quarantaine pour analyse.
     - Fichier de configuration: "local.d/metadata_exporter.conf"
     - Activation: Non (à définir selon votre contexte)
-    - Risque de faux positifs: Aucun pas d'action directe
+    - Risque de faux positifs: Aucun, pas d'action directe
     - utilisation services externes: 
       - potentiellement oui selon ce que vous souhaitez faire.
     - Réference: https://rspamd.com/doc/modules/metadata_exporter.html
@@ -218,7 +218,7 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
       - Par exemple on peut vouloir transmettre les courriels bloqués par l'antivirus vers une quarantaine pour analyse.
     - Fichier de configuration: "local.d/metadata_exporter.conf"
     - Activation: Non (à définir selon votre contexte)
-    - Risque de faux positifs: Aucun pas d'action directe
+    - Risque de faux positifs: Aucun, pas d'action directe
     - utilisation services externes: 
       - potentiellement oui selon ce que vous souhaitez faire.
     - Réference: https://rspamd.com/doc/modules/metadata_exporter.html
@@ -226,21 +226,21 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
     - Description: Il permet de supprimer les symboles "INVALID_MSGID" et "MISSING_MID" lorsqu'un message est signé par DKIM
     - Fichier de configuration: "local.d/mid.conf"
     - Activation: Oui
-    - Risque de faux positifs: Aucun pas d'action directe
+    - Risque de faux positifs: Aucun, pas d'action directe
     - utilisation services externes: non
     - Réference: https://rspamd.com/doc/modules/mid.html
   - **MID**: 
     - Description: Il permet de supprimer les symboles "INVALID_MSGID" et "MISSING_MID" lorsqu'un message est signé par DKIM
     - Fichier de configuration: "local.d/mid.conf"
     - Activation: Oui
-    - Risque de faux positifs: Aucun pas d'action directe
+    - Risque de faux positifs: Aucun, pas d'action directe
     - utilisation services externes: non
     - Réference: https://rspamd.com/doc/modules/mid.html
   - **Milter Headers**: 
     - Description: Permet d'ajouter et/ou supprimer des en-têtes d'un courriels.
     - Fichier de configuration: "local.d/milter_headers.conf"
     - Activation: Oui
-    - Risque de faux positifs: Aucun pas d'action de score ou rejet.
+    - Risque de faux positifs: Aucun, pas d'action de score ou rejet.
     - utilisation services externes: non
     - Réference: https://rspamd.com/doc/modules/milter_headers.html
   - **Mime types**: 
@@ -288,9 +288,9 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
       - l'url contient un chemin qui semble indiquer que le site est potentiellement compromis => symbole: 	HACKED_WP_PHISHING
     - Fichier de configuration: "local.d/phishing.conf"
     - Activation: Oui
-    - Risque de faux positifs: Oui si une personne indique une URL visible avec une URL réelle contenant un domaine different (mais cela est un très mauvaise pratique).
+    - Risque de faux positifs: Oui si une personne indique une URL visible avec une URL réelle contenant un domaine different (mais cela est une très mauvaise pratique).
     - utilisation services externes: 
-      - base de Threat Intel (phishtnak, openphish, surbl)
+      - base de Threat Intel (phishtank, openphish, surbl)
     - Réference: https://rspamd.com/doc/modules/phishing.html
   - **Rate limit**: 
     - Description: Permet de limiter le nombre de message en provenance d'un expediteur.
@@ -331,11 +331,11 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
       - https://rspamd.com/doc/modules/url_reputation.html
       - https://rspamd.com/doc/modules/ip_score.html
   - **Received policy**: 
-    - Description: Verifie dans l'en-tête "received" la présence de mot clé suspect comme "dynamic" qui pourrait indiquer la compromission d'un compte.
+    - Description: Vérifie dans l'en-tête "received" la présence de mots-clé suspects comme "dynamic" qui pourraient indiquer la compromission d'un compte.
     - sumboles: ONCE_RECEIVED_STRICT/ONCE_RECEIVED
     - Fichier de configuration: "local.d/once_received.conf"
     - Activation: Oui
-    - Risque de faux positifs: Oui si dans receive il y a des mots clés (faible)
+    - Risque de faux positifs: Oui si dans receive il y a des mots-clés (faible)
     - utilisation services externes:  non
     - Réference: https://rspamd.com/doc/modules/once_received.html
   - **Replies mode**: 
@@ -356,7 +356,7 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
     - utilisation services externes: Non
     - Réference: https://rspamd.com/doc/modules/spamassassin.html
   - **SpamTrap**: 
-    - Description: Permet d'extraire des spams pour les apprendres et les filtrer selon l'adresse courriel ou le domaine.
+    - Description: Permet d'extraire des spams pour les apprendre et les filtrer selon l'adresse courriel ou le domaine.
     - Fichier de configuration: 
       - "local.d/spamtrap.conf"
       - "maps.d/spamtrap.map" ou redis
@@ -366,7 +366,7 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
       - redis si pas d'utilisation de map
     - Réference: https://rspamd.com/doc/modules/spamtrap.html
   - **SPF**: 
-    - Description: Verification de la légitimité du serveur d'expedition pour le domaine via SPF (https://fr.wikipedia.org/wiki/Sender_Policy_Framework)
+    - Description: Vérification de la légitimité du serveur d'expedition pour le domaine via SPF (https://fr.wikipedia.org/wiki/Sender_Policy_Framework)
     - Symboles: R_SPF_FAIL/R_SPF_NEUTRAL/R_SPF_SOFTFAIL/R_SPF_ALLOW/R_SPF_DNSFAIL
     - Fichier de configuration: "local.d/spf.conf"
     - Activation: Oui
@@ -378,7 +378,7 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
     - Description: Le mode va verifier si l'URL contenu dans un courriel est une redirection (code web 302).
     - Fichier de configuration: "local.d/url_redirector.conf"
     - Activation: Non
-    - Risque de faux positifs: Oui, car de nombreuses structures utilisent des outils de statistique qui cause une redirection.
+    - Risque de faux positifs: Oui, car de nombreuses structures utilisent des outils de statistique qui causent une redirection.
     - utilisation services externes: 
       - Requete web vers l'URL pour identifier le code (200/302/...)
     - Réference: https://rspamd.com/doc/modules/url_redirector.html
@@ -392,7 +392,7 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
 #### Ecrire sa propre règle
 Avec RSPAMD, il est très facile d'écrire sa propre règle, pour plus d'informations: https://rspamd.com/doc/tutorials/writing_rules.html
 #### Tester vos règles
-Afin de tester vos règles et surtout assurer leurs bons fonctionnements, vous pouvez utiliser l'interface graphique avec un courriel qui contient votre contenu à détecter, et verifier le déclenchement de vos règles.
+Afin de tester vos règles et surtout assurer leurs bons fonctionnements, vous pouvez utiliser l'interface graphique avec un courriel qui contient votre contenu à détecter, et vérifier le déclenchement de vos règles.
 ### Configuration
 Comme l'indique Monsieur G. CATTEAU dans son retour d'experience, il est préférable dans un premier temps de mettre RSPAMD en "no action" pour prendre le temps d'identifier les risques de faux positif pouvant engendrer de la perte de courriels légitimes (https://rspamd.com/doc/workers/rspamd_proxy.html#mirroring).
 #### Configuration du service REDIS
