@@ -4,14 +4,11 @@ Date Creation: 25/09/2020
 Date dernière mise à jour: 05/10/2020  
 Facilité de mise en place: Simple ~~/ Moyen / Complexe~~  
 
-URL:
-  - redirection
-  - Proxy web sortant
 Règles:
-1. [Identifier une URL suspecte](#reject)
+1. [Identifier une URL suspecte](#suspect)
+2. [Proxy web sortant](#proxy)
 
-
-## Identifier une URL suspecte <a name="reject"></a>
+## Identifier une URL suspecte <a name="suspect"></a>
 ### Description
 La technique de l'URL malicieuse est très efficace car l'attaquant sait que si son adresse n'est pas en liste noire, alors il y a des grandes chances qu'elle passe vos protections.  
 Si il utilise une URL en "https" votre proxy (ou IDS/IPS) ne verra rien de la transaction (sauf si votre proxy casse le chiffrement).  
@@ -60,3 +57,34 @@ De plus, vous pouvez adapter le score de chacun de ces symboles.
 
 ### Faux positifs
 Vous pouvez configurer le plugin selon les options indiquées dans la PR: https://github.com/rspamd/rspamd/pull/3508 afin d'adapter en cas de faux positif.
+
+## Proxy web sortant <a name="proxy"></a>
+### Description
+Il est possible de contourner la protection de messagerie, ou bien meme si votre utilisateur utilise une autre messagerie (personnelle).  
+Il est donc important d'avoir un proxy web sortant avec une filtration adapter.
+L'objectif de la protection du proxy est de limiter:
+  - le téléchargement de charge depuis le poste client à l'insu de la victime;
+  - la communication entre le poste/serveur infecté et le BOTNET/C&C;
+
+Certains malwares n'ont pas de fonctionnalité pour utiliser un proxy web sortant, ce qui va donc souvent les paraliser. 
+
+Voici ce que vous pouvez limiter sur le proxy:
+  - Connexion directe vers une IP sans resolution (ex: http://X.X.X.X);
+  - Connexion vers un port non standard;
+  - L'utilisation de tunnel (verifier qu'il s'agit bien d'une connexion TLS lors de connexion "https" - https://wiki.squid-cache.org/Features/SslPeekAndSplice)
+  - L'utilisation de listes noires (Threat Intel) et categories (si votre proxy le permet)
+  - L'utilisation de module ICAP
+    - http://www.squid-cache.org/Misc/icap.html
+    - https://docs.diladele.com/administrator_guide_stable/index.html
+    - Vous pouvez utiliser l'ICAP pour afficher un message d'avertissement lorsque vous détectez afin de verifier s'il s'agit bien d'une demande "humaine" (cela permettra de facilement casser les communucations vers un botnet/C&C qui ne sera pas contourner automatiquement l'advertissement):
+       - une hostname jamais vu sur votre réseau
+       - un useragent jamais vu pour l'utilisateur "X"
+       - ...
+
+Pensez à activer les logs de votre proxy avec une bonne rétention et mais aussi les informations nécéssaires à une investigation (referer, user-agent, ...).
+  
+### Exemple de configuration
+Prochainement, nous proposerons une configuration pour le proxy squid. 
+
+### Faux positifs
+
