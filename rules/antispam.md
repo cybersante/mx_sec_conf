@@ -180,7 +180,7 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
     - utilisation services externes:
       - Redis 
     - Réference: https://rspamd.com/doc/modules/greylisting.html
-  - **Hfilter*: 
+  - **Hfilter**: 
     - Description: Verification DNS sur les éléments: from, rcpt, mid, helo, url.
     - Symboles: recherche 'hfilter' dans l'interface web/symbols.
     - Fichier de configuration: "local.d/hfilter.conf"
@@ -393,6 +393,40 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
 Avec RSPAMD, il est très facile d'écrire sa propre règle, pour plus d'informations: https://rspamd.com/doc/tutorials/writing_rules.html
 #### Tester vos règles
 Afin de tester vos règles et surtout assurer leurs bons fonctionnements, vous pouvez utiliser l'interface graphique avec un courriel qui contient votre contenu à détecter, et vérifier le déclenchement de vos règles.
+##### Vous avez déjà un RSPAMD
+Pour mettre votre rspamd déjà existant en test, allez dans le fichier "override.d/worker-proxy.inc" et créer un "mirroir":
+```
+mirror "test" {
+  name = "rspamdtest"
+  hosts = "IP_DOCKER_RSPAMD:11333";
+  probability = 1; # Mirror 100% of traffic
+}
+```
+De plus, vous pouvez ajouter un script afin d'identifier les differences entre votre version stable et celle en test ("override.d/worker-proxy.inc"):
+```
+  script =<<EOD
+return function(results)
+  local log = require "rspamd_logger"
+
+  for k,v in pairs(results) do
+    if type(v) == 'table' then
+      log.errx("%s: %s", k, v['score'])
+    else
+      log.errx("err: %s: %s", k, v)
+    end
+  end
+end
+EOD;
+```
+##### Vous n'avez pas de RSPAMD
+Ajouter RSPAMD dans votre MTA puis afin de voir ces actions, configurez "local.d/actions.conf" avec des scores très élevés:
+```
+reject = 15000;
+add_header = 8000;
+greylist = 7000;
+```
+Cela permettra d'avoir dans les headers de votre courriel les informations RSPAMD mais aussi de pouvoir analyser vos logs (rspamd web, logs, elastic, ...) sans risque de faux positifs.
+
 ### Configuration
 Comme l'indique Monsieur G. CATTEAU dans son retour d'experience, il est préférable dans un premier temps de mettre RSPAMD en "no action" pour prendre le temps d'identifier les risques de faux positif pouvant engendrer de la perte de courriels légitimes (https://rspamd.com/doc/workers/rspamd_proxy.html#mirroring).
 #### Configuration du service REDIS
