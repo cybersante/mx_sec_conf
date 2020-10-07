@@ -1,5 +1,5 @@
 # Règles de filtrage des URL malicieuses
-Tests ACSS concernés n°:  
+Tests ACSS concernés n°: 71, 72, 75
 Date Creation: 25/09/2020  
 Date dernière mise à jour: 05/10/2020  
 Facilité de mise en place: Simple ~~/ Moyen / Complexe~~  
