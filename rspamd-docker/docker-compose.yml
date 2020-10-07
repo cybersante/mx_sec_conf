@@ -1,0 +1,120 @@
+version: '2.1'
+services:
+
+    unbound-rspamd:
+      container_name: unbound
+      image: mailcow/unbound:1.12
+      environment:
+        - TZ=${TZ}
+      volumes:
+        - ./data/hooks/unbound:/hooks
+        - ./data/conf/unbound/unbound.conf:/etc/unbound/unbound.conf:ro
+      restart: always
+      tty: true
+      ports:
+        - 172.17.0.1:53:53
+        - 172.17.0.1:53:53/udp
+    redis-rspamd:
+      container_name: redis
+      image: redis:5-alpine
+      volumes:
+        - redis-vol-rspamd:/data/
+      restart: always
+      environment:
+        - TZ=${TZ}
+      hostname: redis
+    clamd-rspamd:
+      container_name: clamd
+      build:
+        dockerfile: Dockerfile
+        context: ./data/Dockerfiles/clamd/
+        args:
+          - http_proxy=${http_proxy}
+          - https_proxy=${https_proxy}
+          - no_proxy=${no_proxy}
+      image: clamd
+      restart: always
+      dns:
+        - 172.17.0.1
+      environment:
+        - TZ=${TZ}
+        - SKIP_CLAMD=${SKIP_CLAMD:-n}
+      volumes:
+        - ./data/conf/clamav/:/etc/clamav/
+        - ./data/conf/clamav-rules/pdf.yara:/var/lib/clamav/pdf.yara:ro
+        - ./data/conf/clamav-rules/office.yara:/var/lib/clamav/office.yara:ro
+        - ./data/conf/clamav-rules/html.yara:/var/lib/clamav/html.yara:ro
+        - ./data/conf/clamav-rules/pe.yara:/var/lib/clamav/pe.yara:ro
+        - ./data/conf/clamav-rules/vb.yara:/var/lib/clamav/vb.yara:ro
+        - ./data/conf/clamav-rules/swf.yara:/var/lib/clamav/swf.yara:ro
+        - ./data/conf/clamav-rules/url.yara:/var/lib/clamav/url.yara:ro
+        - ./data/conf/clamav-rules/xxe.yara:/var/lib/clamav/xxe.yara:ro
+        - ./data/conf/clamav-rules/otf.yara:/var/lib/clamav/otf.yara:ro
+        - ./data/conf/clamav-rules/lnk.yara:/var/lib/clamav/lnk.yara:ro
+        - ./data/conf/clamav-rules/scf.yara:/var/lib/clamav/scf.yara:ro
+        - ./data/conf/clamav-rules/sdb.yara:/var/lib/clamav/sdb.yara:ro
+        - ./data/conf/clamav-rules/js.yara:/var/lib/clamav/js.yara:ro
+        - ./data/conf/clamav-rules/chm.yara:/var/lib/clamav/chm.yara:ro
+        - ./data/conf/clamav-rules/hta.yara:/var/lib/clamav/hta.yara:ro
+        - ./data/conf/clamav-rules/java.yara:/var/lib/clamav/java.yara:ro
+      hostname: clamd
+    rspamd-rspamd:
+      container_name: rspamd
+      build:
+        dockerfile: Dockerfile
+        context: ./data/Dockerfiles/rspamd/
+        args:
+          - http_proxy=${http_proxy}
+          - https_proxy=${https_proxy}
+          - no_proxy=${no_proxy}
+      image: rspamd
+      stop_grace_period: 30s
+      environment:
+        - TZ=${TZ}
+        - REDIS_SLAVEOF_IP=${REDIS_SLAVEOF_IP:-}
+        - REDIS_SLAVEOF_PORT=${REDIS_SLAVEOF_PORT:-}
+      volumes:
+        - ./data/hooks/rspamd:/hooks
+        - ./data/conf/rspamd/custom/:/etc/rspamd/custom
+        - ./data/conf/rspamd/override.d/:/etc/rspamd/override.d
+        - ./data/conf/rspamd/local.d/:/etc/rspamd/local.d
+        - ./data/conf/rspamd/plugins.d/:/etc/rspamd/plugins.d
+        - ./data/conf/rspamd/lua/:/etc/rspamd/lua/:ro
+        - ./data/conf/rspamd/rspamd.conf.local:/etc/rspamd/rspamd.conf.local
+        - ./data/conf/rspamd/rspamd.conf.override:/etc/rspamd/rspamd.conf.override
+        - ./data/patch/rspamd/url_check.lua:/usr/share/rspamd/plugins/url_check.lua
+        - ./data/patch/rspamd/url_check.conf:/etc/rspamd/modules.d/url_check.conf
+        - ./data/patch/rspamd/mid.lua:/usr/share/rspamd/rules/mid.lua
+        - rspamd-vol-rspamd:/var/lib/rspamd
+      restart: always
+      dns:
+        - 172.17.0.1
+      hostname: rspamd
+      ports:
+        - 11333:11333
+        - 11334:11334
+    olefy-rspamd:
+      container_name: olefy
+      build:
+        dockerfile: Dockerfile
+        context: ./data/Dockerfiles/olefy/
+        args:
+          - http_proxy=${http_proxy}
+          - https_proxy=${https_proxy}
+          - no_proxy=${no_proxy}
+      image: olefy
+      restart: always
+      environment:
+        - TZ=${TZ}
+        - OLEFY_BINDADDRESS=0.0.0.0
+        - OLEFY_BINDPORT=10055
+        - OLEFY_TMPDIR=/tmp
+        - OLEFY_PYTHON_PATH=/usr/bin/python3
+        - OLEFY_OLEVBA_PATH=/usr/bin/olevba3
+        - OLEFY_LOGLVL=20
+        - OLEFY_MINLENGTH=500
+        - OLEFY_DEL_TMP=1
+
+volumes:
+  redis-vol-rspamd:
+  rspamd-vol-rspamd:
