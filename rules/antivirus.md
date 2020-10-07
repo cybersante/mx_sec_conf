@@ -24,7 +24,7 @@ Si vous le souhaitez vous pouvez juste prendre le docker clamav et l'integrer da
 Le [docker inclus](/rspamd-docker/data/Dockerfiles/clamd/Dockerfile):
   - la dernière version de clamav (au 22/09 - version 0.103.0) compilée en mode "hardening" (https://wiki.debian.org/Hardening), ce qui vous protegera à minima même si une faille memoire était découverte;  
   - certaines signatures non officielles;
-  - des [règles yara spécifiques à la messagerie]](/rspamd-docker/data/conf/clamav-rules).
+  - des [règles yara spécifiques à la messagerie](/rspamd-docker/data/conf/clamav-rules).
 #### Package
 Clamav est disponible sur les principales distributions linux. De plus vous pouvez utiliser les signatures non officielles qui sont aussi souvent disponibles.
 ### Fonctionnalités
