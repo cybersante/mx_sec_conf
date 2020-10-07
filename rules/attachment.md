@@ -41,9 +41,9 @@ Veuillez trouver la liste des extensions "interdites" (car normalement aucune pe
 Afin d'identifier les nouveautés vous pouvez regarder sur virustotal ou les sandbox en ligne les extensions des fichiers sousmis (meme si cela ne provient pas forcement d'un courriel).
 ### Exemple de configuration
 Le filtrage des extensions à risque s'effectue avec le module "Mime types" (https://rspamd.com/doc/modules/mime_types.html).
-Vous trouverez la configuration proposé dans le fichier "local.d/mime_types_group.conf", a vous d'adapter le score en fonction de votre politique, si vous souhaitez:
-  - que le courriel contenant une piece jointe spécifique, par exemple "exe" (exécutable) soit rejeté directement alors mettez un score > 15 (à adapter en fonction de votre configuration dans le fichier "local.d/actions.conf").
-  - que le courriel contenant une piece jointe spécifique, par exemple "py" (script python) ne soit pas automatiquement rejeté mais qu'il soit considéré comme suspect mettez un score entre 1 et 7 (à adapter en fonction de votre configuration dans le fichier "local.d/actions.conf").
+Vous trouverez la configuration proposé dans le fichier ["local.d/mime_types.conf"](/rspamd-docker/data/conf/rspamd/local.d/mime_types.conf), a vous d'adapter le score en fonction de votre politique, si vous souhaitez:
+  - que le courriel contenant une piece jointe spécifique, par exemple "exe" (exécutable) soit rejeté directement alors mettez un score > 15 (à adapter en fonction de votre configuration dans le fichier ["local.d/actions.conf"](/rspamd-docker/data/conf/rspamd/local.d/actions.conf)).
+  - que le courriel contenant une piece jointe spécifique, par exemple "py" (script python) ne soit pas automatiquement rejeté mais qu'il soit considéré comme suspect mettez un score entre 1 et 7 (à adapter en fonction de votre configuration dans le fichier ["local.d/actions.conf"](/rspamd-docker/data/conf/rspamd/local.d/actions.conf)).
 
 ### Faux positifs
 Avec vos logs de messagerie, vous pouvez essayer d'identifier si les extensions que vous allez bannir sont utilisées ou non.
@@ -74,18 +74,18 @@ Malheureusement dans ce deux derniers cas, il est très complexe d'arriver à ex
 ### Exemple de configuration
 Il existe plusieurs possibilités pour effectuer ces filtrages:
   - Office:
-    - Règle Yara "office.yara" dans clamav va détecter tous les risques liés à office: dde, macro, ppaction.
+    - Règle Yara ["office.yara"](/rspamd-docker/data/conf/clamav-rules/office.yara) dans clamav va détecter tous les risques liés à office: dde, macro, ppaction.
     - Utilisation de Olefy (deamon qui utilise oletools) qui permet d'obtenir des informations sur le macro d'un fichier office et vous permettra de filtrer avec finesse les MACRO (https://rspamd.com/doc/modules/external_services.html#oletools-extended-mode)
   - RTF
-    - Règle Yara "office.yara" dans clamav va détecter tous les risques liés à rtf: Ole, EmbeddedFiles, potentiel shellcode (cas CVE).
+    - Règle Yara ["office.yara"](/rspamd-docker/data/conf/clamav-rules/office.yara) dans clamav va détecter tous les risques liés à rtf: Ole, EmbeddedFiles, potentiel shellcode (cas CVE).
     - A ce jour (23/09/2020), olefy ne gère pas les fichiers RTF alors que oletools sait les analyser. Il est donc possible que prochainement, l'analyse de RTF soit possible avec olefy.
   - PDF:
-    - Règle YARA "pdf.yara" dans clamav va détecter tous les risques liés aux pdf: fileexport, EmbeddedFiles ,XFA & JS, JS, structure PDF invalide, metadata suspect.
+    - Règle YARA ["pdf.yara"](/rspamd-docker/data/conf/clamav-rules/pdf.yara) dans clamav va détecter tous les risques liés aux pdf: fileexport, EmbeddedFiles ,XFA & JS, JS, structure PDF invalide, metadata suspect.
   - javascript & HTML:
-    - Règle YARA "javascript.yara" dans clamav va détecter tous les risques liés au javascript: obfuscation, fonctions à risque: ActiveX, eval, connexion http(s).
-    - Règle YARA "vb.yara" dans clamav va détecter tous les risques liés au vbscript dans html: obfuscation, fonctions à risque: ActiveX, eval, connexion http(s).
+    - Règle YARA ["javascript.yara"](/rspamd-docker/data/conf/clamav-rules/javascript.yara) dans clamav va détecter tous les risques liés au javascript: obfuscation, fonctions à risque: ActiveX, eval, connexion http(s).
+    - Règle YARA ["vb.yara"](/rspamd-docker/data/conf/clamav-rules/vb.yara) dans clamav va détecter tous les risques liés au vbscript dans html: obfuscation, fonctions à risque: ActiveX, eval, connexion http(s).
   - XML:
-    - Règle YARA "xml.yara" dans clamav va détecter tous les risques liés au XML: XXE (https://en.wikipedia.org/wiki/XML_external_entity_attack).
+    - Règle YARA ["xml.yara"](/rspamd-docker/data/conf/clamav-rules/xml.yara) dans clamav va détecter tous les risques liés au XML: XXE (https://en.wikipedia.org/wiki/XML_external_entity_attack).
 ### Faux positifs
 #### Macro office
 Il est très rare de voir des fichiers office avec du DDE ou ppaction. Par contre, on peut trouver des macros, mais la encore rarement des macros avec de l'obfuscation ou appelant des fonctions de téléchargement ou d'écriture sur le disque.  
@@ -96,16 +96,16 @@ Si vous souhaitez ne pas filtrer tous les macro, désactiver les règles Yara "o
 Vous trouverez la liste des mots clés qu'il est possible de chercher par pattern dans le code d'oletools: https://github.com/decalage2/oletools/blob/master/oletools/olevba.py#L658
 #### RTF
 Il est très rare de voir des RTF légitimes avec du contenu OLE ou un fichier inseré.  
-Si vous identifiez une règle qui cause trop de faux positif, vous pouvez la désactiver dans le fichier "rtf.yara", et nous sommes interessé pour la connaitre afin de pouvoir potentiellement l'ameliorer.
+Si vous identifiez une règle qui cause trop de faux positif, vous pouvez la désactiver dans le fichier ["rtf.yara"](/rspamd-docker/data/conf/clamav-rules/rtf.yara), et nous sommes interessé pour la connaitre afin de pouvoir potentiellement l'ameliorer.
 #### PDF
 Il est possible de voir des PDF avec du javascript (surement sur des documents que l'on peut remplir), par contre il est très rare de voir des fichiers inserés, de l'exportfile ou des structures invalides (utilisés pour contourner ou cve).  
-Si vous identifiez une règle qui cause trop de faux positif, vous pouvez la désactiver dans le fichier "pdf.yara", et nous sommes interessé pour la connaitre afin de pouvoir potentiellement l'ameliorer.
+Si vous identifiez une règle qui cause trop de faux positif, vous pouvez la désactiver dans le fichier ["pdf.yara"](/rspamd-docker/data/conf/clamav-rules/pdf.yara), et nous sommes interessé pour la connaitre afin de pouvoir potentiellement l'ameliorer.
 #### Javascript & HTML
 Il est possible d'avoir du javascript attaché à un courriel, mais il est suspect d'utiliser des fonctions ActiveX, eval(), ou de connexion http(s).  
-Si vous identifiez une règle qui cause trop de faux positif, vous pouvez la désactiver dans le fichier "javascript.yara", et nous sommes interessé pour la connaitre afin de pouvoir potentiellement l'ameliorer.
-Il est très suspect d'avoir du vbscript dans un fichier HTML, cependant vous pouvez désactiver dans le fichier "vb.yara", et nous sommes interessé pour connaitre les faux positifs afin de pouvoir potentiellement ameliorer la règle.
+Si vous identifiez une règle qui cause trop de faux positif, vous pouvez la désactiver dans le fichier ["javascript.yara"](/rspamd-docker/data/conf/clamav-rules/javascript.yara), et nous sommes interessé pour la connaitre afin de pouvoir potentiellement l'ameliorer.
+Il est très suspect d'avoir du vbscript dans un fichier HTML, cependant vous pouvez désactiver dans le fichier ["vb.yara"](/rspamd-docker/data/conf/clamav-rules/vb.yara), et nous sommes interessé pour connaitre les faux positifs afin de pouvoir potentiellement ameliorer la règle.
 #### XML
-L'utilisation de XXE légitime dans un XML doit être très rare, cependant vous pouvez désactiver dans le fichier "xxe.yara", et nous sommes interessé pour connaitre les faux positifs afin de pouvoir potentiellement ameliorer la règle.
+L'utilisation de XXE légitime dans un XML doit être très rare, cependant vous pouvez désactiver dans le fichier ["xxe.yara"](/rspamd-docker/data/conf/clamav-rules/xxe.yara), et nous sommes interessé pour connaitre les faux positifs afin de pouvoir potentiellement ameliorer la règle.
 
 ## Filtrer les pièces jointes susceptibles d'être dangereuses <a name="filter2"></a>
 ### Description
@@ -123,15 +123,15 @@ Les extensions les plus utilisées par les pirates sont les suivantes:
 ### Exemple de configuration
 Il existe plusieurs possibilités pour effectuer ces filtrages:
   - Clamav:
-    - Par défaut clamav scan l'interieur des fichiers courriels (eml, msg) alors que RSPAMD ne gère que eml et il est facile de contourner sa détection "eml" (voir l'issue: https://github.com/rspamd/rspamd/issues/3487). C'est pour cela que nous avons ajouté des règles yara pour détecter les types de fichiers interdits (PE, ...), pour plus d'informations regardez dans le repertoire "data/conf/clamav-rules/".
+    - Par défaut clamav scan l'interieur des fichiers courriels (eml, msg) alors que RSPAMD ne gère que eml et il est facile de contourner sa détection "eml" (voir l'issue: https://github.com/rspamd/rspamd/issues/3487). C'est pour cela que nous avons ajouté des règles yara pour détecter les types de fichiers interdits (PE, ...), pour plus d'informations regardez dans le repertoire ["data/conf/clamav-rules/"](/rspamd-docker/data/conf/clamav-rules/).
     - Clamd.conf avec "AlertEncrypted yes" et Symboles RSPAMD: "CLAM_DETECT_ENCRYPTED" et "CLAM_DETECT_ENCRYPTED_WITH_PASS"
       - filtrage documents (pdf, office) avec mot de passe et zip avec mot de passe
-    - Clamd.conf avec "AlertExceedsMax yes" et "local.d/antivirus.conf" avec "patterns_fail" puis déclenchement sur symbole RSPAMD "CLAM_EXCEEDED" ("local.d/composites.conf"):
+    - Clamd.conf avec "AlertExceedsMax yes" et ["local.d/antivirus.conf"](/rspamd-docker/data/conf/rspamd/local.d/antivirus.conf) avec "patterns_fail" puis déclenchement sur symbole RSPAMD "CLAM_EXCEEDED" (["local.d/composites.conf"](/rspamd-docker/data/conf/rspamd/local.d/composites.conf)):
       - Filtrage archive:
         - qui contient un très gros fichier qui dépasse le seuil de scan
         - qui contient un nombre de fichiers qui dépasse le seuil de scan
         - qui contient une "enfilade" de zip qui dépasse le seuil de scan
-    - Règle Yara "office.yara" dans clamav va détecter tous les risques liés à l'obfuscation de rtf.
+    - Règle Yara ["office.yara"](/rspamd-docker/data/conf/clamav-rules/office.yara) dans clamav va détecter tous les risques liés à l'obfuscation de rtf.
   - RSPAMD:
     - Symbole "MIME_ARCHIVE_IN_ARCHIVE"
       - Filtrage archive qui contient une "enfilade" de zip qui dépasse le seuil de scan
