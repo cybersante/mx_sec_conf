@@ -8,7 +8,7 @@ Les exemples de configuration (ci-dessous) sont basés sur rspamd (https://rspam
 Si vous ne souhaitez pas utiliser RSPAMD, vous pouvez vous en inspirer pour l'adapter à votre solution de protection de messagerie.
 
 1. [Let's get started!](#instal)
-2. [Ce que nous avons ajouté](#add)
+2. [Ce que nous avons ajouté ou configuré dans RSPAMD](#add)
 
 ##  Let's get started! <a name="instal"></a>
 Attention, cette documentation n'a pas pour objectif de vous expliquer en detail les possibilités offertent par Rspamd.  
@@ -452,7 +452,31 @@ Si vous utilisez notre docker-compose, alors vous pouvez integrer à postfix dan
   - si votre docker est sur un autre serveur que postfix: "smtpd_milters = inet:IP-DOCKER:9900" 
     - (pensez à filter le port avec netfilter qu'il ne soit accessible qu'aux IP MX/SMTP)
     - modifier docker-compose.yml en replacant "172.17.0.1:9900:9900" par "9900:9900"
+
+Pour finir, n'oubliez pas de changer le mot de passe de l'interface web dans le fichier "override.d/worker-controller-password.inc" (https://rspamd.com/doc/quickstart.html#setting-the-controller-password).
 #### Configuration de RSPAMD dans un autre MTA
 Vous trouverez dans le lien suivant, les informations pour integrer RSPAMD dans votre MTA: https://rspamd.com/doc/integration.html .
 
-## Ce que nous avons ajouté <a name="add"></a>
+## Ce que nous avons ajouté ou configuré dans RSPAMD <a name="add"></a>
+Les ajoutes ont été realisés sur la version 2.6 de RSPAMD avec la configuration de base "mailcow" (https://github.com/mailcow/mailcow-dockerized/tree/master/data/conf/rspamd).  
+### Configuration global du worker "normal"
+Afin d'adapter le temps d'analyse de clamav et du module check_url, nous avons monté la valeur "task_timeout".  
+De plus, nous avons monté la limite des requetes DNS ("dns_max_requests") qui peuvent devenir importantes avec le module check_url.  
+References:
+  - https://rspamd.com/doc/workers/normal.html
+  - []()
+### "local.d/"
+Nous avons utilisé la configuration de mailcow et l'avons légèrement modifié pour couvrir l'ensemble des risques.  
+Vous pourrez trouver la configuration de chacun des modules/plugins dans le repertoire "local.d".  
+
+### Module check_url
+https://github.com/rspamd/rspamd/pull/3508
+
+### Modification de la rules mid.
+https://github.com/rspamd/rspamd/pull/3509
+
+### Composite
+
+### Rspamd.local.lua
+
+### Score des symboles 
