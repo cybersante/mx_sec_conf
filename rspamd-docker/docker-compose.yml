@@ -91,8 +91,7 @@ services:
         - 172.17.0.1
       hostname: rspamd
       ports:
-        - 11333:11333
-        - 11334:11334
+        - 172.17.0.1:9900:9900
     olefy-rspamd:
       container_name: olefy
       build:
