@@ -471,4 +471,5 @@ Notre configuration ["local.d/composites.conf"](/rspamd-docker/data/conf/rspamd/
 Notre configuration ["lua/rspamd.local.lua"](/rspamd-docker/data/conf/rspamd/lua/rspamd.local.lua#L208-L375) de la ligne 208 à 375. 
 
 ### Score des symboles 
-
+Les scores modifiés depuis l'interface web sont prioritaires sur toutes les autres configurations.  
+Nous avons modifié des scores dans la configuration par le fichier de configuration [local.d/groups.conf](/rspamd-docker/data/conf/rspamd/local.d/groups.conf), cependant, selon votre contexte, il sera peut être nécéssaire de modifier le score.  
