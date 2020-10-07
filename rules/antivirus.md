@@ -21,16 +21,16 @@ Clamav permet de créer des signatures dans son format, mais surtout il peut imp
 Le plus simple pour installer clamav est d'utiliser le docker qui emportera l'ensemble des éléments de protection de la messagerie (rspamd, redis, olefy, clamav, ...).  
 Si vous ne connaissez pas encore la technologie docker, il est temps de s'y mettre: https://www.docker.com/ .   
 Si vous le souhaitez vous pouvez juste prendre le docker clamav et l'integrer dans votre solution existante.  
-Le docker inclus:
+Le [docker inclus](/rspamd-docker/data/Dockerfiles/clamd/Dockerfile):
   - la dernière version de clamav (au 22/09 - version 0.103.0) compilée en mode "hardening" (https://wiki.debian.org/Hardening), ce qui vous protegera à minima même si une faille memoire était découverte;  
   - certaines signatures non officielles;
-  - des règles yara spécifiques à la messagerie.
+  - des [règles yara spécifiques à la messagerie]](/rspamd-docker/data/conf/clamav-rules).
 #### Package
 Clamav est disponible sur les principales distributions linux. De plus vous pouvez utiliser les signatures non officielles qui sont aussi souvent disponibles.
 ### Fonctionnalités
 Clamav possède un outil de mise à jour des signatures nommé "freshclam".
 #### Signatures de base
-Il s'agit des signatures publiques editées par clamav
+Il s'agit des signatures publiques editées par clamav.
 #### Signatures non officielles
 Il s'agit des signatures publiques editées par des tiers (abuse.ch, malwarepatrol, ...).  
 Vous pouvez utiliser le script de mise à jour des signatures tiers inclus dans votre distribution ou https://github.com/extremeshok/clamav-unofficial-sigs .  
