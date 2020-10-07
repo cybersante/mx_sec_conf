@@ -73,12 +73,12 @@ Voici ce que vous pouvez limiter sur le proxy:
   - Connexion vers un port non standard;
   - L'utilisation de tunnel (verifier qu'il s'agit bien d'une connexion TLS lors de connexion "https" - https://wiki.squid-cache.org/Features/SslPeekAndSplice)
   - L'utilisation de listes noires (Threat Intel) et categories (si votre proxy le permet)
-  - L'utilisation de module ICAP
+  - L'utilisation de modules ICAP
     - http://www.squid-cache.org/Misc/icap.html
     - https://docs.diladele.com/administrator_guide_stable/index.html
     - Vous pouvez utiliser l'ICAP pour afficher un message d'avertissement lorsque vous détectez afin de verifier s'il s'agit bien d'une demande "humaine" (cela permettra de facilement casser les communucations vers un botnet/C&C qui ne sera pas contourner automatiquement l'advertissement):
-       - une hostname jamais vu sur votre réseau
-       - un useragent jamais vu pour l'utilisateur "X"
+       - hostname jamais vu sur votre réseau
+       - useragent jamais vu pour l'utilisateur "X"
        - ...
 
 Pensez à activer les logs de votre proxy avec une bonne rétention et mais aussi les informations nécéssaires à une investigation (referer, user-agent, ...).
