@@ -467,16 +467,19 @@ References:
   - []()
 ### "local.d/"
 Nous avons utilisé la configuration de mailcow et l'avons légèrement modifié pour couvrir l'ensemble des risques.  
-Vous pourrez trouver la configuration de chacun des modules/plugins dans le repertoire "local.d".  
+Vous pourrez trouver la configuration de chacun des modules/plugins dans le repertoire ["local.d"](/rspamd-docker/data/conf/rspamd/local.d/).  
 
-### Module check_url
-Vous pourrez trouver le module dans le docker présent sur le [dépot](/rspamd-docker/data/patch/rspamd/check_url.lua) ou dans la [PR](https://github.com/rspamd/rspamd/pull/3508).
+### Module url_check
+Vous pourrez trouver le module dans le docker présent sur le [dépot](/rspamd-docker/data/patch/rspamd/url_check.lua) ou dans la [PR](https://github.com/rspamd/rspamd/pull/3508).
 
 ### Modification de la rules mid.
 Vous pourrez trouver le module dans le docker présent sur le [dépot](/rspamd-docker/data/patch/rspamd/mid.lua) ou dans la [PR](https://github.com/rspamd/rspamd/pull/3509).
 
-### Composite
+### Composites
+Notre configuration ["local.d/composites.conf"](/rspamd-docker/data/conf/rspamd/local.d/composites.conf#L1-L21) de la ligne 1 à 21.  
 
 ### Rspamd.local.lua
+Notre configuration ["lua/rspamd.local.lua"](/rspamd-docker/data/conf/rspamd/lua/rspamd.local.lua#L208-L375) de la ligne 208 à 375. 
 
 ### Score des symboles 
+
