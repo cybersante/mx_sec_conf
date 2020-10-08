@@ -35,6 +35,7 @@ Pour chaque symbole on définie un score. Si le courriel déclenche un symbole (
 Pour plus d'informations: 
   - https://rspamd.com/doc/configuration/composites.html
   - https://rspamd.com/doc/configuration/metrics.html
+  - https://github.com/rspamd/rspamd/blob/master/conf/composites.conf (composites inclus dans rspamd)
 
 #### Les modules
 Vous pourrez trouver les configurations par default de RSPAMD sur github: https://github.com/rspamd/rspamd/tree/master/conf .  
