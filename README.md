@@ -34,7 +34,7 @@ Pour finir, il est important de ne pas tout miser sur les protections péripheri
 
 ### Les règles
   - [Base MTA](rules/mta.md)
-  - [Mise en place antispam](rules/antispam.md
+  - [Mise en place antispam](rules/antispam.md)
   - [Mise en place antivirus](rules/antivirus.md)
   - [Protection de l'identité](rules/ident.md)
   - [Filtrage des pièces jointes malicieuses](rules/attachment.md)
