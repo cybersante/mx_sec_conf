@@ -276,7 +276,7 @@ rspamd_config:register_symbol{
   name = 'SUSPECT_DISPLAY_NAME',
   description = 'Display name use suspect information, potential spoof',
   group = 'headers',
-  score = 3.0,
+  score = 4.0,
 }
 
 local check_xoip_suspect = rspamd_config:register_symbol{
@@ -371,6 +371,6 @@ rspamd_config:register_symbol{
   name = 'SUSPECT_XOIP',
   description = 'X-Origine IP suspect (potential account compromised)',
   group = 'headers',
-  score = 3.0,
+  score = 4.0,
 }
 
