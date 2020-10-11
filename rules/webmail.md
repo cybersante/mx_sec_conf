@@ -10,10 +10,10 @@ Règles:
 
 ## L'authentification sur webmail <a name="auth"></a>
 ### Description
-Parce que l'on ne peut jamais garantir à 100% qu'une attaquant n'arrivera pas à obtenir les identifiants d'un de vos utilisateurs (phishing, brute force, rejeu de mot de passe, ...), il est important d'avoir une authentification forte et de surveiller vos logs.  
+Parce que l'on ne peut jamais garantir à 100% qu'un attaquant n'arrivera pas à obtenir les identifiants d'un de vos utilisateurs (phishing, brute force, rejeu de mot de passe, ...), il est important d'avoir une authentification forte et de surveiller vos logs.  
 ### Exemple de configuration
 La majorité des webmails (commerciaux ou open source) permettent l'utilisation de la double authentification qui reste un de meilleurs moyens pour eviter le drame!  
-Si malheureusement, vous ne souhaitez pas reccourrir à ce mecanisme, voici les mesures que vous pouvez mettre en place:
+Si malheureusement, vous ne souhaitez pas reccurrir à ce mecanisme, voici les mesures que vous pouvez mettre en place:
   - Filtrage GEOIP & liste noire avec surveillance (pourrait indiquer un compte compromis)
   - Empreinte du poste utilisateur ("IP Country/IP provider/User-Agent") et alerte en cas de nouvelle empreinte
   - Mecanisme anti-brute force (exemple: fail2ban)
@@ -28,13 +28,13 @@ Il est important que la politique de sortie des courriels vers internet (en prov
 ### Exemple de configuration
 Il faut faire passer le flux de sortie (du webmail vers internet) par une instance RSPAMD/CLAMAV spécifique (de préférence), et effectuer les filtrages comme si c'etait de la reception:
   - interdire l'usurpation d'identité en sortie;
-  - interdire les pieces jointes dangereuses;
+  - interdire les pièces jointes dangereuses;
   - interdire les reply-to hors domaine;
   - interdire les symboles "XOIP_SUSPECT" (si vous avez activé l'ajout de l'information "X-Originating-IP");
   - interdire les URL suspectes.
   
 De plus, il faut limiter le nombre d'envoi d'un utilisateur à la minute (généralement, l'attaquant utilise un script qui va générer un flux très important sur un laps de temps court).  
-Vous pouvez utiliser le module rate_limit de RSPAMD pour realiser cette action (https://rspamd.com/doc/modules/ratelimit.html).  
+Vous pouvez utiliser le module rate_limit de RSPAMD pour réaliser cette action (https://rspamd.com/doc/modules/ratelimit.html).  
 Vous pouvez aussi utiliser les options internes de votre webmail qui souvent proposent ce type d'option.  
 ### Faux positifs
 Pas de faux positif connu.
