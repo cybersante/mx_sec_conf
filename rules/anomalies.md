@@ -13,7 +13,7 @@ Les objectifs de l'attaquant sont:
   - pour faire passer une piece jointe interdite ou qui va conten(https://nvd.nist.gov/vuln/detail/CVE-2019-19680, https://kc.mcafee.com/corporate/index?page=content&id=SB10161)
   - 
 Une anomalie peut aussi être utilisée dans l'exploitation d'une vulnerabilité de type CVE sur le client ou le serveur de messagerie.  
-Il est important de suivre les mises à jour de tous les éléments qui rentrent en interraction, par exemple, si une librairie xml ou zip avait une CVE, il est possible que vos outils de protection l'utilise pour analyser ce type de piece et donc pourrait les affecter.  
+Il est important de suivre les mises à jour de tous les éléments qui rentrent en interaction, par exemple, si une librairie xml ou zip avait une CVE, il est possible que vos outils de protection l'utilise pour analyser ce type de piece et donc pourrait les affecter.  
 
 Règles:
 1. [Protéger vous des anomalies pour faire passer une pièce jointe malveillante](#atta)
