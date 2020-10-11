@@ -32,7 +32,7 @@ Pas de faux positif connu.
 
 ## Segmentation des rôles <a name="segm"></a>
 ### Description
-Cette règle permet une meilleure maitrise des flux entrants et sortants et d'adapter au mieux les configurations de filtrages.
+Cette règle permet une meilleure maitrise des flux entrants et sortants et d'adapter au mieux la configuration des filtrages.
 De plus, si un élément de votre architecture est en liste noire, les autres éléments ne seront pas impactés.
 (https://fr.wikipedia.org/wiki/Open_relay)
 ### Exemple de configuration
@@ -75,6 +75,7 @@ Pas de faux positif connu.
 ## Chiffrement <a name="cyph"></a>
 ### Description
 Cette règle permet de garantir la confidentialité d'un échange afin de couvrir le risque lié a l'écoute du réseau.
+Pour l'échange de données de santé avec d'autres structures, privilégiez l'utilisation d'un système de messagerie MSSanté. 
 Privilégiez l'échange par chiffrement sur l'ensemble de votre réseau, lors de la réception et de l'envoi de courriel.
 ### Exemple de configuration
 Vous pouvez utiliser "let's encrypt" (https://letsencrypt.org/fr/) pour générer vos certificats.
