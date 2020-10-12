@@ -7,7 +7,6 @@ Facilité de mise en place: Simple ~~/ Moyen / Complexe~~
 Pour rappel, les anomalies volontairement intégrées dans un courriel sont utilisées principalement pour coutourner des protections.  
 Les objectifs de l'attaquant sont:
  - de contourner l'antivirus et le filtre sur les fichiers (exemples: interdiction d'un exécutable);
-   - exemples: https://nvd.nist.gov/vuln/detail/CVE-2019-19680 ,  https://kc.mcafee.com/corporate/index?page=content&id=SB10161
  - de contourner les protections de filtrage d'URL malveillante ou de réécriture d'URL;
  - d'exploiter une anomalie qui va alterer l'affichage des informations sur le courriels pour induire en erreur l'utilisateur;
  - d'exploiter une faille dans le serveur ou le client de messagerie;
