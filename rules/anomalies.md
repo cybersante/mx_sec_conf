@@ -1,5 +1,5 @@
 # Règles de protection contre les anomalies
-Tests ACSS concernés n°:   
+Tests ACSS concernés n°: 73, 74, 81 à 146, 148 à 164, 167 à 174    
 Date Creation: 25/09/2020  
 Date dernière mise à jour: 25/09/2020  
 Facilité de mise en place: Simple ~~/ Moyen / Complexe~~  
