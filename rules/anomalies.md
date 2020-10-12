@@ -1,5 +1,5 @@
 # Règles de protection contre les anomalies
-Tests ACSS concernés n°: 
+Tests ACSS concernés n°:   
 Date Creation: 25/09/2020  
 Date dernière mise à jour: 25/09/2020  
 Facilité de mise en place: Simple ~~/ Moyen / Complexe~~  
