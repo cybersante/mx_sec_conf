@@ -1,4 +1,4 @@
-# Règles de protection contre l'usurpation d'identité
+# Règles de protection contre les anomalies
 Tests ACSS concernés n°: 
 Date Creation: 25/09/2020  
 Date dernière mise à jour: 25/09/2020  
@@ -6,14 +6,12 @@ Facilité de mise en place: Simple ~~/ Moyen / Complexe~~
 
 Pour rappel, les anomalies volontairement intégrées dans un courriel sont utilisées principalement pour coutourner des protections.  
 Les objectifs de l'attaquant sont:
- - soit de vous transmettre un fichier malveillant en vue de son execution ;
-   - Dans ce cas l'utilisation d'anomalie va permettre de contourner l'antivirus et le filtre sur les fichiers (exemples: interdiction d'un exécutable).
- - soit de vous faire cliquer sur une URL malveillante;
- - soit de récuperer des informations par retour de courriel en cherchant à abuser de la confiance de l'utilisateur;
-  - pour faire passer une piece jointe interdite ou qui va conten(https://nvd.nist.gov/vuln/detail/CVE-2019-19680, https://kc.mcafee.com/corporate/index?page=content&id=SB10161)
-  - 
-Une anomalie peut aussi être utilisée dans l'exploitation d'une vulnerabilité de type CVE sur le client ou le serveur de messagerie.  
-Il est important de suivre les mises à jour de tous les éléments qui rentrent en interaction, par exemple, si une librairie xml ou zip avait une CVE, il est possible que vos outils de protection l'utilise pour analyser ce type de piece et donc pourrait les affecter.  
+ - de contourner l'antivirus et le filtre sur les fichiers (exemples: interdiction d'un exécutable);
+   - exemples: https://nvd.nist.gov/vuln/detail/CVE-2019-19680 ,  https://kc.mcafee.com/corporate/index?page=content&id=SB10161
+ - de contourner les protections de filtrage d'URL malveillante ou de réécriture d'URL;
+ - d'exploiter une anomalie qui va alterer l'affichage des informations sur le courriels pour induire en erreur l'utilisateur;
+ - d'exploiter une faille dans le serveur ou le client de messagerie;
+   - Il est important de suivre les mises à jour de tous les éléments qui rentrent en interaction avec les composants de la messagerie. Par exemple, si une librairie xml ou zip avait une CVE, il est possible que vos outils de protection l'utilisent pour analyser ce types de fichier (zip ou xml) et donc pourrait les rendre vulnerables.   
 
 Règles:
 1. [Protéger vous des anomalies pour faire passer une pièce jointe malveillante](#atta)
