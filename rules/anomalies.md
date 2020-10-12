@@ -9,7 +9,7 @@ Les objectifs de l'attaquant sont:
  - soit de vous transmettre un fichier malveillant en vue de son execution ;
    - Dans ce cas l'utilisation d'anomalie va permettre de contourner l'antivirus et le filtre sur les fichiers (exemples: interdiction d'un exécutable).
  - soit de vous faire cliquer sur une URL malveillante;
- - soit de récuperer des informations par retour de courriel en utilisant des mensonges;
+ - soit de récuperer des informations par retour de courriel en cherchant à abuser de la confiance de l'utilisateur;
   - pour faire passer une piece jointe interdite ou qui va conten(https://nvd.nist.gov/vuln/detail/CVE-2019-19680, https://kc.mcafee.com/corporate/index?page=content&id=SB10161)
   - 
 Une anomalie peut aussi être utilisée dans l'exploitation d'une vulnerabilité de type CVE sur le client ou le serveur de messagerie.  
