@@ -91,7 +91,7 @@ Vous pourrez trouver les configurations par default de RSPAMD sur github: https:
     - utilisation services externes: Aucun
     - Réference: https://rspamd.com/doc/modules/chartable.html  
   - **DCC**:
-    - Description: DCC identifie via le checksum d'un message transmis à leur serveur si le message à été transmis en masse ou non.
+    - Description: DCC identifie via le checksum d'un message transmis à un serveur de "collecte" de messages si le message a été transmis en masse ou non.
     - Symbole de resultat: "DCC_\*"
     - Fichier de configuration: "local.d/dcc.conf" 
     - Activation: Non
