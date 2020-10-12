@@ -13,7 +13,7 @@ Règles:
 Parce que l'on ne peut jamais garantir à 100% qu'un attaquant n'arrivera pas à obtenir les identifiants d'un de vos utilisateurs (phishing, brute force, rejeu de mot de passe, ...), il est important d'avoir une authentification forte et de surveiller vos logs.  
 ### Exemple de configuration
 La majorité des webmails (commerciaux ou open source) permettent l'utilisation de la double authentification qui reste un de meilleurs moyens pour eviter le drame!  
-Si malheureusement, vous ne souhaitez pas reccurrir à ce mecanisme, voici les mesures que vous pouvez mettre en place:
+Si malheureusement, vous ne souhaitez pas recourir à ce mecanisme, voici les mesures que vous pouvez mettre en place:
   - Filtrage GEOIP & liste noire avec surveillance (pourrait indiquer un compte compromis)
   - Empreinte du poste utilisateur ("IP Country/IP provider/User-Agent") et alerte en cas de nouvelle empreinte
   - Mecanisme anti-brute force (exemple: fail2ban)
