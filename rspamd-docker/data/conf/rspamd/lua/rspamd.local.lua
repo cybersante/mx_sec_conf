@@ -268,7 +268,7 @@ local check_from_display_name_suspect = rspamd_config:register_symbol{
         end
         if found then return false end
     end
-    if cnt_p == 1 or cnt_b == 1 or cnt_b > 3 or cnt_p > 3 then return false end
+    if not (cnt_p == 2 or cnt_b == 2 or cnt_b == 3 or cnt_p == 3) then return false end
     if not found then
       task:insert_result('SUSPECT_DISPLAY_NAME', 1.0, from[1]['name'], from[1]['user'])
       return false
