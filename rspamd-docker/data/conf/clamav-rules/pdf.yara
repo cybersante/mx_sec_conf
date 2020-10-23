@@ -42,22 +42,6 @@ rule XFA_withJS_in_PDF {
    condition:
       uint32(0) == 0x46445025 and $a and $b
 }
-rule invalide_structure_PDF {
-	meta:
-		author = "Glenn Edwards (@hiddenillusion)"
-		version = "0.1"
-		description = "Invalide structure PDF"
-		weight = 5
-		var_match = "pdf_invalid_struct_bool"
-		tag = "attack.initial_access,attack.t1189,attack.t1192,attack.t1193,attack.t1194,attack.execution"
-        strings:
-                $magic = { 25 50 44 46 }
-				// Required for a valid PDF
-                $reg0 = /trailer\r?\n?.*\/Size.*\r?\n?\.*/
-                $reg1 = /\/Root.*\r?\n?.*startxref\r?\n?.*\r?\n?%%EOF/
-        condition:
-                $magic in (0..1024) and not $reg0 and not $reg1
-}
 rule suspicious_js_PDF {
 	meta:
 		author = "Glenn Edwards (@hiddenillusion) - modified by Lionel PRAT"
