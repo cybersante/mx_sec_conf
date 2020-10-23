@@ -246,24 +246,29 @@ local check_from_display_name_suspect = rspamd_config:register_symbol{
     local from = task:get_from(2)
     if not (from and from[1] and from[1].name and from[1].user) then return false end
     if (from[1].name == "" or from[1].user == "") then return false end
-    dispname = string.gsub(from[1].name, "%s+", "")
+    local dispname = string.gsub(from[1].name, "%s+", "")
     if dispname == "" then return false end
     -- See if we can parse an email address from the name
     -- "false name" <real.name@dom.com> => from[1].name == "false name" || from[1].user == "real.name"
     -- split name ( blank and dot) and search (lowcase) in user
     local found = false
+    local cnt_b = 0
     for i in string.gmatch(from[1].name, "%S+") do
+	cnt_b = cnt_b + 1
         if  string.find(string.lower(from[1].user), string.lower(i)) then
             found = true
         end
         if found then return false end
     end
+    local cnt_p = 0
     for i in string.gmatch(from[1].name, "%.") do
+	cnt_p = cnt_p + 1
         if  string.find(string.lower(from[1].user), string.lower(i)) then
             found = true
         end
         if found then return false end
     end
+    if cnt_p == 1 or cnt_b == 1 or cnt_b > 3 or cnt_p > 3 then return false end
     if not found then
       task:insert_result('SUSPECT_DISPLAY_NAME', 1.0, from[1]['name'], from[1]['user'])
       return false
