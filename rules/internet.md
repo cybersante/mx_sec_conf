@@ -1,12 +1,13 @@
 # Règles de protection des services de la messagerie exposés sur internet
 Tests ACSS concernés n°: aucun  
 Date Creation: 25/09/2020  
-Date dernière mise à jour: 25/09/2020  
+Date dernière mise à jour: 23/10/2020  
 Facilité de mise en place: Simple ~~/ Moyen / Complexe~~  
 
 Règles:
 1. [Proteger vos services avec authentification](#auth)
 2. [limiter votre SMTP sortant accessible de l'exterieur](#limit)
+3. [Protegez-vous contre la centralisation des comptes](#centr)
 
 ## Proteger vos services avec authentification <a name="auth"></a>
 ### Description
@@ -40,5 +41,17 @@ Il faut faire passer le flux de sortie (du smtp internet vers internet) par une 
   
 De plus, il faut limiter le nombre d'envoi d'un utilisateur à la minute (généralement, l'attaquant utilise un script qui va générer un flux très important sur un laps de temps court).  
 Vous pouvez utiliser le module rate_limit de RSPAMD pour réaliser cette action (https://rspamd.com/doc/modules/ratelimit.html).
+### Faux positifs
+Pas de faux positif connu.
+
+## Protegez-vous contre la centralisation des comptes <a name="centr"></a>
+### Description
+Certains services sur smartphone (comme l'appli gmail) propose aux utilisateurs de centraliser l'ensemble de leurs boites mail (professionnelles et personnelles).  
+Des utilisateurs de votre SI utilisent peut être ce service qui peut être dangereux pour vous (données sensibles, si le compte personnel est compromis, ...).  
+L'objectif de cette règle est principalement la détection de cette pratique, le filtrage par GEOIP peut aussi être utilisé pour bloquer cette pratique.  
+
+### Exemple de configuration
+Afin de vous proteger contre cette pratique, vous pouvez utiliser la GEOIP sur les authentifications via webmail/pop/imap. Vous pourrez identifier par exemple l'adresse IP de google qui peut indiquer la centralisation des comptes sur gmail...
+
 ### Faux positifs
 Pas de faux positif connu.
