@@ -245,6 +245,7 @@ local check_from_display_name_suspect = rspamd_config:register_symbol{
   callback = function (task)
     local from = task:get_from(2)
     if not (from and from[1] and from[1].name and from[1].user) then return false end
+    if (from[1].name == "" or from[1].user == "") then return false end
     -- See if we can parse an email address from the name
     -- "false name" <real.name@dom.com> => from[1].name == "false name" || from[1].user == "real.name"
     -- split name ( blank and dot) and search (lowcase) in user
