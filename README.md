@@ -1,6 +1,6 @@
 # Securiser la réception des messages (MX)
 ## Introduction
-Ce dépot contient les configurations de sécurité permettant de passer les tests de l'outil d'analyse des vulnérabilités de la cellule ACSS(ANS) présenté lors du webinaire ACSS n°4 (https://esante.gouv.fr/sites/default/files/media_entity/documents/acss_web_conference_n4.pdf - https://www.facebook.com/AgenceDuNumeriqueEnSante/videos/792330108189438/).  
+Ce dépot contient les configurations de sécurité permettant de passer les tests de l'outil d'analyse des vulnérabilités de la cellule ACSS(ANS) présenté lors du webinaire du CERT Santé n°4 (https://esante.gouv.fr/sites/default/files/media_entity/documents/acss_web_conference_n4.pdf - https://www.facebook.com/AgenceDuNumeriqueEnSante/videos/792330108189438/).  
 
 Au delà de la couverture des tests mis en oeuvre par le service, il couvre aussi les principaux risques suivants liés à la messagerie professionnelle (à l'exception des spams classiques qui sont souvent soumis à l'apprentissage):
   - DDoS et DoS (https://fr.wikipedia.org/wiki/Attaque_par_d%C3%A9ni_de_service) ;
